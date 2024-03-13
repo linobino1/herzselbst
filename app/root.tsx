@@ -1,15 +1,14 @@
 import type { MetaFunction } from "@remix-run/node";
 import {
   Links,
-  LiveReload,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-
-//css should be imported as an side effect for Vite
-import "./tailwind.css";
+import "virtual:uno.css";
+import "@unocss/reset/tailwind.css";
+import "./global.css";
 
 export const meta: MetaFunction = () => [
   { title: "Welcome to RePay!" },

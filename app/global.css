@@ -1,0 +1,14 @@
+@unocss all;
+
+.lexical > * {
+  all: revert;
+}
+.lexical .text-left {
+  text-align: left;
+}
+.lexical .text-center {
+  text-align: center;
+}
+.lexical .text-right {
+  text-align: right;
+}
