@@ -9,8 +9,8 @@ Simple template to get started with [Remix](https://remix.run) and [PayloadCMS](
 Copy .env.example to .env and fill the required environment variables.
 
 ```sh
-yarn;
-yarn dev
+pnpm i
+pnpm dev
 ```
 
 ## Deployment
@@ -18,15 +18,34 @@ yarn dev
 First, build your app for production:
 
 ```sh
-yarn build
+pnpm build
 ```
 
 Then run the app in production mode:
 
 ```sh
-yarn start
+pnpm start
 ```
 
 This template comes with Github Action for continuous deployment to [Fly.io](https://fly.io/docs/speedrun/), but it can also be deployed to any host that accepts a docker image.
 
 You can disable the the action by deleting `./github/workflows` and `fly.toml`, or in the Actions Workflows tab on Github.
+
+### Fly.io Setup
+
+1. Create an account on [Fly.io](https://fly.io)
+1. Install the [Fly CLI](https://fly.io/docs/getting-started/installing-flyctl/)
+1. Run `flyctl login` and follow the prompts
+1. Run `flyctl launch` in the project root
+1. Enter `y` to `copy its configuration to the new app`
+1. Enter `N` to `tweak these settings`
+1. The app should deploy now
+1. Now you can set up the Github Action
+
+### Github Action
+
+1. Create a new secret on your repository called `FLY_API_TOKEN` with your Fly.io API token
+
+## Media Files
+
+Media files should be stored in a S3 bucket. Create a bucket at Cloudflare, AWS, or any other provider and fill the required environment variables in the .env file. When using Cloudflare R2, specify `S3_REGION=auto`

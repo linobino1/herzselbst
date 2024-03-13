@@ -1,3 +1,4 @@
+# fly.toml app configuration file generated for herzselbst on 2024-03-13T17:26:41+01:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -41,8 +42,3 @@ kill_timeout = '5s'
   cpu_kind = 'shared'
   cpus = 1
   memory_mb = 512
-
-[[mounts]]
-  source = 'herzselbst-media'
-  destination = '/media'
-  initial_size = '1GB'
