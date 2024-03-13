@@ -45,3 +45,19 @@ declare module "@remix-run/express" {
     mode?: string;
   }): RequestHandler;
 }
+
+declare global {
+  interface ServerEnvironment {
+    NODE_ENV: string;
+    MEDIA_URL: string;
+  }
+  interface BrowserEnvironment {
+    PAYLOAD_PUBLIC_SERVER_URL: string;
+  }
+  interface Window {
+    ENV: BrowserEnvironment;
+  }
+  namespace NodeJS {
+    interface ProcessEnv extends ServerEnvironment, BrowserEnvironment {}
+  }
+}

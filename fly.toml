@@ -1,10 +1,9 @@
-# fly.toml app configuration file generated for repay-divine-bird-61 on 2024-02-04T12:50:51-08:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'repay'
-primary_region = 'sea'
+app = 'herzselbst'
+primary_region = 'ams'
 kill_signal = 'SIGINT'
 kill_timeout = '5s'
 
@@ -42,3 +41,8 @@ kill_timeout = '5s'
   cpu_kind = 'shared'
   cpus = 1
   memory_mb = 512
+
+[[mounts]]
+  source = 'herzselbst-media'
+  destination = '/media'
+  initial_size = '1GB'

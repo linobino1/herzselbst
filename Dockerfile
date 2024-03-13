@@ -1,48 +1,21 @@
-# syntax = docker/dockerfile:1
-
-# Adjust NODE_VERSION as desired
-ARG NODE_VERSION=18.17.0
-FROM node:${NODE_VERSION}-alpine as base
-
-LABEL fly_launch_runtime="Remix"
-
-# Remix app lives here
+FROM node:18-slim AS base
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+COPY . /app
 WORKDIR /app
 
-# Set production environment
-ENV NODE_ENV="production"
-ARG YARN_VERSION=1.22.21
-RUN npm install -g yarn@$YARN_VERSION --force
+FROM base AS prod-deps
+RUN pnpm install --prod --frozen-lockfile
 
+FROM base AS build
+RUN pnpm install --prod false --frozen-lockfile
+RUN pnpm run build
 
-# Throw-away build stage to reduce size of final image
-FROM base as build
-
-# Install packages needed to build node modules
-RUN apk update && \
-    apk add build-base gyp pkgconfig python3
-
-# Install node modules
-COPY --link package.json yarn.lock ./
-RUN yarn install --frozen-lockfile --production=false
-
-# Copy application code
-COPY --link . .
-
-# Build application
-RUN yarn run build
-
-# Remove development dependencies
-RUN yarn install --production=true
-
-
-# Final stage for app image
 FROM base
+COPY --from=prod-deps /app/node_modules /app/node_modules
+COPY --from=build /app/dist /app/dist
+COPY --from=build /app/build /app/build
 
-# Copy built application
-COPY --from=build /app /app
-
-# Start the server by default, this can be overwritten at runtime
-EXPOSE 8080
-CMD ["yarn", "run", "start"]
-
+EXPOSE 3000
+CMD [ "pnpm", "start" ]
