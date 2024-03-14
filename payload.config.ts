@@ -5,8 +5,14 @@ import { buildConfig } from "payload/config";
 import path from "path";
 import Users from "./cms/collections/Users";
 import Media from "./cms/collections/Media";
+import Pages from "./cms/collections/Pages";
+import seoPlugin from "@payloadcms/plugin-seo";
 import { cloudStorage } from "@payloadcms/plugin-cloud-storage";
 import { s3Adapter } from "@payloadcms/plugin-cloud-storage/s3";
+import Navigations from "./cms/globals/Navigations";
+import Site from "./cms/globals/Site";
+import addSlugField from "./cms/plugins/addSlugField";
+import addUrlField from "./cms/plugins/addUrlField";
 
 export default buildConfig({
   localization: {
@@ -28,11 +34,18 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.MONGODB_URI ?? false,
   }),
-  collections: [Users, Media],
+  collections: [Pages, Media, Users],
+  globals: [Navigations, Site],
   typescript: {
     outputFile: path.resolve(__dirname, "cms/payload-types.ts"),
   },
   plugins: [
+    addSlugField,
+    addUrlField,
+    seoPlugin({
+      globals: ["site"],
+      uploadsCollection: "media",
+    }),
     cloudStorage({
       enabled: process.env.S3_ENABLED === "true",
       collections: {

@@ -20,6 +20,9 @@ dependencies:
   '@payloadcms/plugin-cloud-storage':
     specifier: 1.0.19
     version: 1.0.19(@aws-sdk/client-s3@3.529.1)(@aws-sdk/lib-storage@3.532.0)(payload@2.11.2)
+  '@payloadcms/plugin-seo':
+    specifier: ^2.2.1
+    version: 2.2.1(payload@2.11.2)(react@18.2.0)
   '@payloadcms/richtext-lexical':
     specifier: ^0.7.0
     version: 0.7.0(@lexical/clipboard@0.13.1)(payload@2.11.2)(typescript@5.4.2)(yjs@13.6.14)
@@ -56,6 +59,9 @@ dependencies:
   isbot:
     specifier: ^5.1.0
     version: 5.1.1
+  lexical:
+    specifier: ^0.13.1
+    version: 0.13.1
   morgan:
     specifier: ^1.10.0
     version: 1.10.0
@@ -68,9 +74,15 @@ dependencies:
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
+  slugify:
+    specifier: ^1.6.6
+    version: 1.6.6
   source-map-support:
     specifier: ^0.5.21
     version: 0.5.21
+  tailwind-merge:
+    specifier: ^2.2.1
+    version: 2.2.1
   tiny-invariant:
     specifier: ^1.3.1
     version: 1.3.3
@@ -109,6 +121,9 @@ devDependencies:
   '@unocss/preset-web-fonts':
     specifier: ^0.58.5
     version: 0.58.5
+  '@unocss/transformer-directives':
+    specifier: ^0.58.6
+    version: 0.58.6
   autoprefixer:
     specifier: ^10.4.17
     version: 10.4.18(postcss@8.4.35)
@@ -2737,6 +2752,16 @@ packages:
       range-parser: 1.2.1
     dev: false
 
+  /@payloadcms/plugin-seo@2.2.1(payload@2.11.2)(react@18.2.0):
+    resolution: {integrity: sha512-EqC+98oAwH0qlqVM/X7/zvKKAvWuHAGj8zzcwNGJN/Q7tIh9NB5isKSxeIXI8e9QxuRzCnR2MVBi0Q/I0SKZTQ==}
+    peerDependencies:
+      payload: ^2.7.0
+      react: ^18.0.0
+    dependencies:
+      payload: 2.11.2(@types/react@18.2.65)(esbuild@0.17.6)(typescript@5.4.2)(webpack@5.90.3)
+      react: 18.2.0
+    dev: false
+
   /@payloadcms/richtext-lexical@0.7.0(@lexical/clipboard@0.13.1)(payload@2.11.2)(typescript@5.4.2)(yjs@13.6.14):
     resolution: {integrity: sha512-3ZrX+vsNdPYi6QYDMlssfR+ikmwdXSVXdcfC+iiEd8kg3++NErLeOFwaJY8i9YSuxES/WnDuLU934sUZfcniyQ==}
     peerDependencies:
@@ -4275,6 +4300,10 @@ packages:
     resolution: {integrity: sha512-qbPqL+46hf1/UelQOwUwpAuvm6buoss43DPYHOPdfNJ+NTWkSpATQMF0JKT04QE0QRQbHNSHdMe9ariG+IIlCw==}
     dev: true
 
+  /@unocss/core@0.58.6:
+    resolution: {integrity: sha512-m87iuENM/PLqLKnfE2mJbpfzj7NQ99LP2go0r+x5X4kXKppyGRJNQg6RIW3AqTS22jup1YPgd62UNXvvRtHtww==}
+    dev: true
+
   /@unocss/extractor-arbitrary-variants@0.58.5:
     resolution: {integrity: sha512-KJQX0OJKzy4YjJo09h2la2Q+cn5IJ1JdyPVJJkzovHnv7jSBWzsfct+bj/6a+SJ4p4JBIqEJz3M/qxHv4EPJyA==}
     dependencies:
@@ -4377,6 +4406,14 @@ packages:
       magic-string: 0.30.8
     dev: true
 
+  /@unocss/rule-utils@0.58.6:
+    resolution: {integrity: sha512-qbVDeyKzExFY/YeoIbMw/lu8PXEGJzSHrFXRumNHX5lvTu8ggAjH6p9xyvYa/YnuNU0+pFKuYxG8LNK2F8f1EQ==}
+    engines: {node: '>=14'}
+    dependencies:
+      '@unocss/core': 0.58.6
+      magic-string: 0.30.8
+    dev: true
+
   /@unocss/scope@0.58.5:
     resolution: {integrity: sha512-vSentagAwYTnThGRCjzZ6eNSSRuzdWBl21L1BbvVNM91Ss/FugQnZ1hd0m3TrVvvStYXnFVHMQ/MjCAEJ4cMYg==}
     dev: true
@@ -4409,6 +4446,14 @@ packages:
     dependencies:
       '@unocss/core': 0.58.5
       '@unocss/rule-utils': 0.58.5
+      css-tree: 2.3.1
+    dev: true
+
+  /@unocss/transformer-directives@0.58.6:
+    resolution: {integrity: sha512-8/+KGRmRnlkAJCRt4VqcYK16SnEr9wf1q7D9OCM2kZhk33Sx5SlsO6vjNZ1IH4c67/WviwNV6+KeS4elnQY8bA==}
+    dependencies:
+      '@unocss/core': 0.58.6
+      '@unocss/rule-utils': 0.58.6
       css-tree: 2.3.1
     dev: true
 
@@ -11197,6 +11242,11 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /slugify@1.6.6:
+    resolution: {integrity: sha512-h+z7HKHYXj6wJU+AnS/+IH8Uh9fdcX1Lrhg1/VMdf9PwoBQXFcXiAdsy2tSK0P6gKwJLXp02r90ahUCqHk9rrw==}
+    engines: {node: '>=8.0.0'}
+    dev: false
+
   /smart-buffer@4.2.0:
     resolution: {integrity: sha512-94hK0Hh8rPqQl2xXc3HsaBoOXKV20MToPkcXvwbISWLEs+64sBq5kFgn2kJDHb1Pry9yrP0dxrCI9RRci7RXKg==}
     engines: {node: '>= 6.0.0', npm: '>= 3.0.0'}
@@ -11536,6 +11586,12 @@ packages:
 
   /tabbable@5.3.3:
     resolution: {integrity: sha512-QD9qKY3StfbZqWOPLp0++pOrAVb/HbUi5xCc8cUo4XjP19808oaMiDzn0leBY5mCespIBM0CIZePzZjgzR83kA==}
+    dev: false
+
+  /tailwind-merge@2.2.1:
+    resolution: {integrity: sha512-o+2GTLkthfa5YUt4JxPfzMIpQzZ3adD1vLVkvKE1Twl9UAhGsEbIZhHHZVRttyW177S8PDJI3bTQNaebyofK3Q==}
+    dependencies:
+      '@babel/runtime': 7.24.0
     dev: false
 
   /tailwindcss@3.4.1(ts-node@10.9.2):

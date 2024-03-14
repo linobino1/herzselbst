@@ -1,7 +1,19 @@
 @unocss all;
 
+html {
+  font-size: 15px;
+  line-height: 1.8em;
+}
+
+h1 {
+  @apply text-key-500 text-4xl leading-normal;
+}
+
 .lexical > * {
   all: revert;
+}
+.lexical p {
+  min-height: 0.1px;
 }
 .lexical .text-left {
   text-align: left;
