@@ -29,7 +29,6 @@ const NavigationItem: React.FC<{
   }
 
   if (item.type === "internal") {
-    console.log("item", JSON.stringify(item, null, 2));
     return <NavLink to={(item.doc?.value as any).url}>{item.label}</NavLink>;
   }
 
