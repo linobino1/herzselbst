@@ -6,8 +6,8 @@ import {
   useRouteError,
 } from "@remix-run/react";
 import type { Media, Page } from "payload/generated-types";
-import Gutter from "~/components/Gutter";
 import Image from "~/components/Image";
+import Intro from "~/components/Intro";
 import Blocks from "~/components/blocks/Blocks";
 import generateTitle from "~/util/generateTitle";
 
@@ -73,8 +73,10 @@ export const loader = async ({
 
 export default function Page() {
   const { page } = useLoaderData<typeof loader>();
+
   return (
     <>
+      {page?.slug === "home" && <Intro />}
       <h1 className="mb-12">{page?.title}</h1>
       <div className="grid grid-cols-[auto_auto] gap-16">
         <Blocks blocks={page?.layout} />
