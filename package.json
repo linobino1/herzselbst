@@ -4,7 +4,7 @@
   "scripts": {
     "build": "run-s \"build:*\"",
     "build:remix": "remix vite:build",
-    "build:payload": "payload build",
+    "build:payload": "payload generate:types && payload build",
     "build:server": "tsc -p tsconfig.server.json",
     "dev": "node -r ts-node/register --watch-path ./server.ts server.ts",
     "start": "cross-env PAYLOAD_CONFIG_PATH=dist/payload.config.js NODE_ENV=production node dist/server.js",
