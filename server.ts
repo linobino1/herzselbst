@@ -19,12 +19,13 @@ async function start() {
   const vite =
     process.env.NODE_ENV === "production"
       ? undefined
-      : await import("vite").then(({ createServer }) =>
+      : // @ts-ignore
+        await import("vite").then(({ createServer }) =>
           createServer({
             server: {
               middlewareMode: true,
             },
-          })
+          }),
         );
 
   // Start Payload CMS
@@ -58,7 +59,7 @@ async function start() {
   } else {
     app.use(
       "/assets",
-      express.static("build/client/assets", { immutable: true, maxAge: "1y" })
+      express.static("build/client/assets", { immutable: true, maxAge: "1y" }),
     );
   }
 
@@ -68,12 +69,14 @@ async function start() {
   app.all(
     "*",
     createRequestHandler({
+      // @ts-ignore
       build: vite
         ? () =>
             vite.ssrLoadModule(
-              "virtual:remix/server-build"
+              "virtual:remix/server-build",
             ) as Promise<ServerBuild>
-        : await import("./build/server/index.js"),
+        : // @ts-ignore
+          await import("./build/server/index.js"),
       getLoadContext(req, res) {
         return {
           payload: req.payload,
@@ -81,12 +84,12 @@ async function start() {
           res,
         };
       },
-    })
+    }),
   );
 
   const port = process.env.PORT || 3000;
   app.listen(port, () =>
-    console.log("Express server listening on http://localhost:" + port)
+    console.log("Express server listening on http://localhost:" + port),
   );
 }
 
