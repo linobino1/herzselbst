@@ -44,7 +44,8 @@ You can disable the the action by deleting `./github/workflows` and `fly.toml`, 
 
 ### Github Action
 
-1. Create a new secret on your repository called `FLY_API_TOKEN` with your Fly.io API token
+1. Create a deploy token by running `flyctl tokens create deploy`
+1. Create a new secret on your repository called `FLY_API_TOKEN` with your deploy token at `Settings > Secrets and Variables > Actions`
 
 ## Media Files
 
