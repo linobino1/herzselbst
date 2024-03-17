@@ -7,7 +7,6 @@ import {
 } from "@remix-run/react";
 import type { Media, Page } from "payload/generated-types";
 import Image from "~/components/Image";
-import Intro from "~/components/Intro";
 import Blocks from "~/components/blocks/Blocks";
 import generateTitle from "~/util/generateTitle";
 
@@ -76,7 +75,6 @@ export default function Page() {
 
   return (
     <>
-      {page?.slug === "home" && <Intro />}
       <h1 className="mb-12">{page?.title}</h1>
       <div className="grid grid-cols-[auto_auto] gap-16">
         <Blocks blocks={page?.layout} />

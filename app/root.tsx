@@ -8,6 +8,7 @@ import {
   ScrollRestoration,
   json,
   useLoaderData,
+  useLocation,
 } from "@remix-run/react";
 import "virtual:uno.css";
 import "@unocss/reset/tailwind.css";
@@ -15,6 +16,7 @@ import "./global.css";
 import type { Media } from "payload/generated-types";
 import Image from "./components/Image";
 import Navigation from "./components/Navigation";
+import Intro from "./components/Intro";
 
 export async function loader({ context: { payload } }: LoaderFunctionArgs) {
   const [site, navigations] = await Promise.all([
@@ -41,6 +43,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => [
 
 export default function App() {
   const { ENV, site, navigations } = useLoaderData<typeof loader>();
+  const { pathname } = useLocation();
 
   return (
     <html lang="de" className="font-sans text-gray-800">
@@ -56,6 +59,7 @@ export default function App() {
         />
       </head>
       <body>
+        {pathname === "/" && <Intro />}
         <div className="mx-auto grid min-h-[100vh] w-full max-w-[1320px] grid-cols-[380px_calc(100%_-_380px)]">
           <aside className="border-r-1 border-key-200 px-8 pt-12">
             <NavLink to="/" prefetch="intent">
