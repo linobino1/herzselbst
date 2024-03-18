@@ -72,8 +72,13 @@ export default function App() {
               />
             </div>
           </aside>
-          <div className="px-16 pt-32">
-            <Outlet />
+          <div className="flex min-h-[100vh] flex-col">
+            <div className="flex-1 px-16 pt-32">
+              <Outlet />
+            </div>
+            <footer className="bg-key-500 mt-32 w-full px-4 py-8">
+              <Navigation items={navigations.footer} className="flex gap-4" />
+            </footer>
           </div>
         </div>
         <ScrollRestoration />

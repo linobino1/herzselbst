@@ -1,21 +1,31 @@
 import React from "react";
-import type { Navigations } from "payload/generated-types";
-import { Link, NavLink } from "@remix-run/react";
+import type { Navigations, Page } from "payload/generated-types";
+import { Link, NavLink, useLocation } from "@remix-run/react";
 import { twMerge } from "tailwind-merge";
 
 type Props = {
   items: Navigations["main" | "footer"];
+  nested?: boolean;
   className?: string;
 };
 
 const NavigationItem: React.FC<{
   item: NonNullable<Navigations["main"]>[0];
+  nested: boolean;
 }> = ({ item }) => {
+  const { pathname } = useLocation();
   if (item.type === "subnavigation") {
+    const isActive = item.subnavigation?.some((subitem) => {
+      return pathname.includes((subitem.doc?.value as Page).slug || "");
+    });
     return (
-      <div>
-        <div>{item.label}</div>
-        <Navigation items={item.subnavigation} />
+      <div className="flex flex-col gap-2">
+        <div className={twMerge(isActive && "text-key-500")}>{item.label}</div>
+        <Navigation
+          items={item.subnavigation}
+          nested={true}
+          className={"pl-6 text-sm"}
+        />
       </div>
     );
   }
@@ -29,17 +39,30 @@ const NavigationItem: React.FC<{
   }
 
   if (item.type === "internal") {
-    return <NavLink to={(item.doc?.value as any).url}>{item.label}</NavLink>;
+    return (
+      <NavLink
+        to={(item.doc?.value as any).url}
+        className={({ isActive }) => twMerge(isActive && "text-key-500")}
+      >
+        {item.label}
+      </NavLink>
+    );
   }
 
   return <div className="flex items-center">{item.label}</div>;
 };
 
-export const Navigation: React.FC<Props> = ({ items, className }) => {
+export const Navigation: React.FC<Props> = ({
+  items,
+  nested = false,
+  className,
+}) => {
   // each item renders as either an internal link, an external link with an icon or text, or another navigation
   return items ? (
-    <nav className={twMerge("", className)}>
-      {items?.map((item) => <NavigationItem item={item} key={item.id} />)}
+    <nav className={twMerge("flex gap-4", className)}>
+      {items?.map((item) => (
+        <NavigationItem item={item} key={item.id} nested={nested} />
+      ))}
     </nav>
   ) : (
     <></>
