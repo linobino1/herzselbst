@@ -76,10 +76,10 @@ export default function Page() {
   return (
     <>
       <h1 className="mb-12">{page?.title}</h1>
-      <div className="grid grid-cols-[auto_auto] gap-16">
+      <div className="flex gap-16">
         <Blocks blocks={page?.layout} />
-        {page?.images && (
-          <div className="space-y-16 pr-4 pt-6">
+        {page?.images?.length ? (
+          <div className="shrink-0 space-y-16 pr-4 pt-6">
             {page.images.map((image) => (
               <Image
                 media={image.image as Media}
@@ -88,7 +88,7 @@ export default function Page() {
               />
             ))}
           </div>
-        )}
+        ) : null}
       </div>
     </>
   );
