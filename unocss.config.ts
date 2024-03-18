@@ -20,6 +20,10 @@ export default defineConfig({
           name: "Spartan",
           weights: [400],
         },
+        altsans: {
+          name: "League Spartan",
+          weights: [400],
+        },
       },
     }),
     presetIcons(),

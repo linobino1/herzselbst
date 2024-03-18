@@ -8,6 +8,20 @@ html {
 h1 {
   @apply text-key-500 text-4xl leading-normal;
 }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.lexical h1,
+.lexical h2,
+.lexical h3,
+.lexical h4,
+.lexical h5,
+.lexical h6 {
+  @apply font-altsans;
+}
 
 .lexical > * {
   all: revert;
