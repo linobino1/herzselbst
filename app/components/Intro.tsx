@@ -19,8 +19,6 @@ const Intro = () => {
     setTimeout(() => {
       setHide(true);
     }, 3000);
-
-    console.log("hide", hide);
   }, []);
 
   return (
