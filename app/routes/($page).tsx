@@ -7,7 +7,7 @@ import {
 } from "@remix-run/react";
 import type { Media, Page } from "payload/generated-types";
 import Image from "~/components/Image";
-import Blocks from "~/components/blocks/Blocks";
+import RichText from "~/components/RichText";
 import generateTitle from "~/util/generateTitle";
 
 export function ErrorBoundary() {
@@ -77,7 +77,7 @@ export default function Page() {
     <>
       <h1 className="mb-12">{page?.title}</h1>
       <div className="flex gap-16">
-        <Blocks blocks={page?.layout} />
+        <RichText content={page?.content} />
         {page?.images?.length ? (
           <div className="shrink-0 space-y-16 pr-4 pt-6">
             {page.images.map((image) => (

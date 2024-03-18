@@ -38,3 +38,7 @@ h6,
 .lexical .text-right {
   text-align: right;
 }
+
+.lexical a {
+  @apply text-key-500 underline;
+}

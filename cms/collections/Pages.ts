@@ -1,6 +1,15 @@
-import { blocks } from "../blocks";
 import type { CollectionConfig } from "payload/types";
 import { publicReadOnly } from "../access/publicReadOnly";
+import {
+  BlocksFeature,
+  HTMLConverterFeature,
+  LinkFeature,
+  lexicalEditor,
+  lexicalHTML,
+} from "@payloadcms/richtext-lexical";
+import { HTMLConverterWithAlign } from "../lexical/HTMLConverterWithAlign";
+import { UploadHTMLConverter } from "../lexical/UploadHTMLCOnverter";
+import Video from "../blocks/Video";
 
 const Pages: CollectionConfig = {
   slug: "pages",
@@ -49,12 +58,41 @@ const Pages: CollectionConfig = {
       ],
       required: false,
     },
+    // {
+    //   name: "layout",
+    //   label: "Layout",
+    //   type: "blocks",
+    //   blocks,
+    // },
     {
-      name: "layout",
-      label: "Layout",
-      type: "blocks",
-      blocks,
+      name: "content",
+      label: "Inhalt",
+      type: "richText",
+      editor: lexicalEditor({
+        features: ({ defaultFeatures }) => [
+          ...defaultFeatures,
+          LinkFeature({
+            enabledCollections: ["pages", "media"],
+          }),
+          BlocksFeature({
+            blocks: [Video],
+          }),
+          HTMLConverterFeature({
+            // @ts-ignore
+            converters: ({ defaultConverters }) => {
+              return [
+                HTMLConverterWithAlign,
+                UploadHTMLConverter,
+                ...defaultConverters,
+              ];
+            },
+          }),
+        ],
+      }),
     },
+    lexicalHTML("content", {
+      name: "content_html",
+    }),
   ],
 };
 
