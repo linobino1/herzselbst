@@ -33,6 +33,10 @@ const Pages: CollectionConfig = {
     {
       name: "images",
       label: "Runde Abbildungen",
+      labels: {
+        singular: "Bild",
+        plural: "Bilder",
+      },
       type: "array",
       fields: [
         {
