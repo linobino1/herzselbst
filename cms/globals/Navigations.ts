@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { isLoggedIn } from "../access/isLoggedIn";
 import type { ArrayField, GlobalConfig } from "payload/types";
 
@@ -17,7 +18,29 @@ const createNavigationField = (
   minRows: 1,
   admin: {
     components: {
-      RowLabel: ({ data }: { data: any }): string => data.label,
+      RowLabel: ({ data, index = 0 }: { data: any; index?: number }) => {
+        const [label, setLabel] = useState(
+          `Feature ${String(index).padStart(2, "0")}`,
+        );
+
+        useEffect(() => {
+          if (data.type === "external") {
+            setLabel(data.label || data.url);
+          } else if (data.doc?.value) {
+            fetch(`/api/pages/${data.doc.value}`).then(async (res) => {
+              setLabel((await res.json()).title);
+            });
+          } else if (data.category?.value) {
+            fetch(`/api/categories/${data.category.value}`).then(
+              async (res) => {
+                setLabel((await res.json()).title);
+              },
+            );
+          }
+        }, [data]);
+
+        return label;
+      },
     },
     condition: (data: any, siblingData: any): boolean => {
       if (nested) {
