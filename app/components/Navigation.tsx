@@ -1,5 +1,5 @@
 import React from "react";
-import type { Navigations, Page } from "payload/generated-types";
+import type { Navigations, Category } from "payload/generated-types";
 import { Link, NavLink, useLocation } from "@remix-run/react";
 import { twMerge } from "tailwind-merge";
 
@@ -14,17 +14,29 @@ const NavigationItem: React.FC<{
   nested: boolean;
 }> = ({ item }) => {
   const { pathname } = useLocation();
+
   if (item.type === "subnavigation") {
-    const isActive = item.subnavigation?.some((subitem) => {
-      return pathname.includes((subitem.doc?.value as Page).slug || "");
-    });
+    const category = item.category?.value as Category;
+    const isActive = pathname.includes(category.slug || "");
     return (
-      <div className="flex flex-col gap-2">
-        <div className={twMerge(isActive && "text-key-500")}>{item.label}</div>
+      <div className="transition-500 flex flex-col gap-2 transition-colors ease-in-out ">
+        <NavLink
+          to={category.url || ""}
+          className={twMerge(
+            "hover:text-key-400",
+            isActive && "text-key-500 peer",
+          )}
+          prefetch="intent"
+        >
+          {category.title}
+        </NavLink>
         <Navigation
           items={item.subnavigation}
           nested={true}
-          className={"flex-col pl-6 text-sm font-medium"}
+          className={twMerge(
+            "transition-max-height max-h-[20em] flex-col overflow-hidden pl-6 text-sm font-medium duration-200 ease-in-out",
+            !isActive && "max-h-0",
+          )}
         />
       </div>
     );
@@ -42,7 +54,10 @@ const NavigationItem: React.FC<{
     return (
       <NavLink
         to={(item.doc?.value as any).url}
-        className={({ isActive }) => twMerge(isActive && "text-key-500")}
+        className={({ isActive }) =>
+          twMerge("hover:text-key-400", isActive && "text-key-500")
+        }
+        prefetch="intent"
       >
         {(item.doc?.value as any).title}
       </NavLink>

@@ -68,7 +68,7 @@ export default function App() {
             <div className="mt-12 w-full flex-1 pl-12">
               <Navigation
                 items={navigations.main}
-                className="flex flex-col gap-2 text-lg text-gray-500"
+                className="flex-col text-lg text-gray-500"
               />
             </div>
             <div className="text-key-500 font-altsans space-y-2 py-8 pl-12">

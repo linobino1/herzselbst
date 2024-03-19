@@ -1,4 +1,4 @@
-import { type LoaderFunctionArgs } from "@remix-run/node";
+import { redirect, type LoaderFunctionArgs } from "@remix-run/node";
 import type { MetaFunction } from "@remix-run/react";
 import {
   useLoaderData,
@@ -48,14 +48,64 @@ export const meta: MetaFunction<typeof loader> = ({ data, matches }) => {
 };
 
 export const loader = async ({
-  params: { page },
+  params: { page, category },
   context: { payload },
 }: LoaderFunctionArgs) => {
+  // find out which page to load
+  let pageSlug: string = "home";
+
+  // no params given -> load home page
+  if (typeof category === "undefined" && typeof page === "undefined") {
+    pageSlug = "home";
+  } else if (typeof category !== "undefined" && typeof page !== "undefined") {
+    // both params given -> load page
+    pageSlug = page;
+  } else if (typeof category !== "undefined" && typeof page === "undefined") {
+    // only one param given -> could be a page or category slug
+    const [pageDocs, categoryDocs] = await Promise.all([
+      payload.find({
+        collection: "pages",
+        where: {
+          slug: {
+            equals: category,
+          },
+        },
+        depth: 1,
+      }),
+      payload.find({
+        collection: "categories",
+        where: {
+          slug: {
+            equals: category,
+          },
+        },
+        depth: 0,
+      }),
+    ]);
+
+    if (pageDocs.totalDocs) {
+      pageSlug = category;
+    } else if (categoryDocs.totalDocs) {
+      pageSlug = (
+        await payload.findByID({
+          collection: "pages",
+          id: categoryDocs.docs[0]?.defaultPage as string,
+        })
+      ).slug as string;
+      throw redirect(`/${category}/${pageSlug}`);
+    } else {
+      throw new Response(null, {
+        status: 404,
+        statusText: "Not Found",
+      });
+    }
+  }
+
   const pageDocs = await payload.find({
     collection: "pages",
     where: {
       slug: {
-        equals: page ?? "home",
+        equals: pageSlug,
       },
     },
   });

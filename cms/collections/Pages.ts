@@ -1,4 +1,4 @@
-import type { CollectionConfig } from "payload/types";
+import type { CollectionConfig, FieldHookArgs } from "payload/types";
 import { publicReadOnly } from "../access/publicReadOnly";
 import { lexicalHTML } from "@payloadcms/richtext-lexical";
 
@@ -16,13 +16,33 @@ const Pages: CollectionConfig = {
   access: publicReadOnly,
   custom: {
     addUrlField: {
-      hook: (slug?: string) => `/${slug || ""}`,
+      hook: async ({ siblingData, req: { payload } }: FieldHookArgs) => {
+        let s = `/${siblingData.slug || ""}`;
+        if (siblingData.category) {
+          let { category } = siblingData;
+          if (typeof category === "string") {
+            category = await payload.findByID({
+              collection: "categories",
+              id: category,
+            });
+          }
+          s = `/${category.slug}${s}`;
+        }
+        return s;
+      },
     },
     addSlugField: {
       from: "title",
     },
   },
   fields: [
+    {
+      name: "category",
+      label: "Kategorie",
+      type: "relationship",
+      relationTo: "categories",
+      maxDepth: 0,
+    },
     {
       name: "title",
       label: "Titel",

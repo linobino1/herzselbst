@@ -38,11 +38,9 @@ export const addUrlField: Plugin = (incomingConfig: Config): Config => {
                       },
                     ],
                     afterRead: [
-                      ({ siblingData }: FieldHookArgs): string => {
+                      (args: FieldHookArgs): string => {
                         const relativeUrl =
-                          collection.custom?.addUrlField.hook(
-                            siblingData.slug
-                          ) || "";
+                          collection.custom?.addUrlField.hook(args) || "";
                         return relativeUrl || "";
                       },
                     ],
@@ -64,7 +62,7 @@ export const addUrlField: Plugin = (incomingConfig: Config): Config => {
                 enableRichTextLink: false,
                 enableRichTextRelationship: false,
               },
-            }
+            },
       ) || []),
     ],
   };

@@ -59,5 +59,8 @@ export default defineConfig({
       //   950: "#080808",
       // },
     },
+    transitionProperty: {
+      "max-h": "max-height",
+    },
   },
 });

@@ -5,6 +5,7 @@ import path from "path";
 import Users from "./cms/collections/Users";
 import Media from "./cms/collections/Media";
 import Pages from "./cms/collections/Pages";
+import Categories from "./cms/collections/Categories";
 import seoPlugin from "@payloadcms/plugin-seo";
 import { cloudStorage } from "@payloadcms/plugin-cloud-storage";
 import { s3Adapter } from "@payloadcms/plugin-cloud-storage/s3";
@@ -65,7 +66,7 @@ export default buildConfig({
     url: process.env.MONGODB_URI ?? false,
     migrationDir: path.resolve(__dirname, "migrations"),
   }),
-  collections: [Pages, Media, Users],
+  collections: [Pages, Categories, Media, Users],
   globals: [Navigations, Site],
   typescript: {
     outputFile: path.resolve(__dirname, "cms/payload-types.ts"),
