@@ -252,7 +252,9 @@ export function Serialize({ nodes }: Props): JSX.Element {
                     <summary className="text-key-500 font-altsans mb-4 cursor-pointer pl-4 text-xl underline">
                       {node.fields.title}
                     </summary>
-                    <Serialize nodes={node.fields.content.root.children} />
+                    <div className="pb-4">
+                      <Serialize nodes={node.fields.content.root.children} />
+                    </div>
                   </details>
                 );
 

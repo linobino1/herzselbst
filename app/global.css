@@ -22,9 +22,9 @@ h6,
   @apply font-altsans;
 }
 
-.lexical > p,
-.lexical > ul,
-.lexical > ol {
+.lexical p,
+.lexical ul,
+.lexical ol {
   all: revert;
 }
 .lexical p {
@@ -32,6 +32,9 @@ h6,
 }
 .lexical h3 {
   @apply text-xl;
+}
+.lexical h4 {
+  @apply text-lg;
 }
 .lexical ul {
   all: revert;
