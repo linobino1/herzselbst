@@ -11,7 +11,7 @@ const Pages: CollectionConfig = {
   admin: {
     group: "Inhalte",
     useAsTitle: "title",
-    defaultColumns: ["title", "slug", "updatedAt"],
+    defaultColumns: ["title", "slug", "category"],
   },
   access: publicReadOnly,
   custom: {
