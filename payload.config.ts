@@ -26,6 +26,10 @@ import Publications from "./cms/blocks/Publications";
 import Foldable from "./cms/blocks/Foldable";
 
 export default buildConfig({
+  rateLimit: {
+    window: 15 * 60 * 1000, // 15 minutes
+    max: process.env.NODE_ENV === "development" ? 9999999 : 1000, // limit each IP to 1000 requests per windowMs
+  },
   localization: {
     locales: ["de"],
     defaultLocale: "de",
