@@ -76,8 +76,12 @@ export default function App() {
             <div className="flex-1 px-16 pt-32">
               <Outlet />
             </div>
-            <footer className="bg-key-500 mt-32 w-full px-4 py-8">
+            <footer className="bg-key-500 font-altsans mt-16 flex w-full flex-col items-center gap-1 p-4 text-sm text-white">
               <Navigation items={navigations.footer} className="flex gap-4" />
+              <p>
+                Copyright ©{new Date().getFullYear()} Praxis und Schule für
+                transpersonale Psychologie. Alle Rechte vorbehalten.
+              </p>
             </footer>
           </div>
         </div>
