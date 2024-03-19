@@ -129,7 +129,7 @@ export default function Page() {
       <div className="flex gap-16">
         <RichText content={page?.content} />
         {page?.images?.length ? (
-          <div className="shrink-0 space-y-16 pr-4 pt-6">
+          <div className="shrink-0 space-y-16 p-2">
             {page.images.map((image) => (
               <Image
                 media={image.image as Media}
