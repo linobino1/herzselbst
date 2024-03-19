@@ -10,7 +10,8 @@
     "start": "cross-env PAYLOAD_CONFIG_PATH=dist/payload.config.js NODE_ENV=production node dist/server.js",
     "generate:types": "payload generate:types",
     "clean": "shx rm -rf node_modules dist build public/build",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "payload": "cross-env PAYLOAD_CONFIG_PATH=payload.config.ts payload"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.529.1",

@@ -37,7 +37,6 @@ const Pages: CollectionConfig = {
       name: "title",
       label: "Titel",
       type: "text",
-      localized: true,
       required: true,
     },
     {
