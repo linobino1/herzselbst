@@ -20,7 +20,7 @@ const createNavigationField = (
     components: {
       RowLabel: ({ data, index = 0 }: { data: any; index?: number }) => {
         const [label, setLabel] = useState(
-          `Feature ${String(index).padStart(2, "0")}`,
+          `Item ${String(index).padStart(2, "0")}`,
         );
 
         useEffect(() => {
