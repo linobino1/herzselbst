@@ -60,19 +60,31 @@ export default function App() {
       </head>
       <body>
         {pathname === "/" && <Intro />}
-        <div className="mx-auto grid min-h-[100vh] w-full max-w-[1320px] grid-cols-[380px_calc(100%_-_380px)]">
-          <aside className="border-r-1 border-key-200 px-8 pt-12">
+        <div className="mx-auto grid h-[100vh] w-full max-w-[1320px] grid-cols-[380px_calc(100%_-_380px)] overflow-hidden">
+          <aside className="border-r-1 border-key-200 flex h-[100vh] flex-col overflow-y-visible px-8 pt-12">
             <NavLink to="/" prefetch="intent">
               {site.logo && <Image media={site.logo as Media} />}
             </NavLink>
-            <div className="mt-12 w-full px-12">
+            <div className="mt-12 w-full flex-1 pl-12">
               <Navigation
                 items={navigations.main}
                 className="flex flex-col gap-2 text-lg text-gray-500"
               />
             </div>
+            <div className="text-key-500 font-altsans space-y-2 py-8 pl-12">
+              <div className="flex items-center gap-2">
+                <div className="i-ion:ios-call text-xl" />
+                <a href={`tel:${site.contact?.phone}`}>{site.contact?.phone}</a>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="i-ion:md-mail text-xl" />
+                <a href={`mailto:${site.contact?.email}`}>
+                  {site.contact?.email}
+                </a>
+              </div>
+            </div>
           </aside>
-          <div className="flex min-h-[100vh] flex-col">
+          <div className="flex min-h-[100vh] flex-col overflow-y-auto">
             <div className="flex-1 px-16 pt-32">
               <Outlet />
             </div>

@@ -12,6 +12,7 @@ export default defineConfig({
   presets: [
     presetUno(),
     presetWind() /* tailwind compatible */,
+    presetIcons(),
     presetWebFonts({
       customFetch: (url: string) => axios.get(url).then((it) => it.data),
       provider: "google",

@@ -19,6 +19,22 @@ export const Site: GlobalConfig = {
       required: true,
       relationTo: "media",
     },
+    {
+      name: "contact",
+      type: "group",
+      fields: [
+        {
+          name: "phone",
+          label: "Telefon",
+          type: "text",
+        },
+        {
+          name: "email",
+          label: "E-Mail",
+          type: "text",
+        },
+      ],
+    },
   ],
 };
 

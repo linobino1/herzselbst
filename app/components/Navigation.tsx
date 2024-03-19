@@ -24,7 +24,7 @@ const NavigationItem: React.FC<{
         <Navigation
           items={item.subnavigation}
           nested={true}
-          className={"pl-6 text-sm"}
+          className={"pl-6 text-sm font-medium"}
         />
       </div>
     );
