@@ -1,5 +1,4 @@
 import { mongooseAdapter } from "@payloadcms/db-mongodb";
-import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { viteBundler } from "@payloadcms/bundler-vite";
 import { buildConfig } from "payload/config";
 import path from "path";
@@ -13,6 +12,17 @@ import Navigations from "./cms/globals/Navigations";
 import Site from "./cms/globals/Site";
 import addSlugField from "./cms/plugins/addSlugField";
 import addUrlField from "./cms/plugins/addUrlField";
+import {
+  BlocksFeature,
+  HTMLConverterFeature,
+  LinkFeature,
+  lexicalEditor,
+} from "@payloadcms/richtext-lexical";
+import { HTMLConverterWithAlign } from "./cms/lexical/HTMLConverterWithAlign";
+import { UploadHTMLConverter } from "./cms/lexical/UploadHTMLCOnverter";
+import Video from "./cms/blocks/Video";
+import Publications from "./cms/blocks/Publications";
+import Foldable from "./cms/blocks/Foldable";
 
 export default buildConfig({
   localization: {
@@ -30,7 +40,27 @@ export default buildConfig({
       },
     }),
   },
-  editor: lexicalEditor({}),
+  editor: lexicalEditor({
+    features: ({ defaultFeatures }) => [
+      ...defaultFeatures,
+      LinkFeature({
+        enabledCollections: ["pages", "media"],
+      }),
+      BlocksFeature({
+        blocks: [Video, Publications, Foldable],
+      }),
+      HTMLConverterFeature({
+        // @ts-ignore
+        converters: ({ defaultConverters }) => {
+          return [
+            HTMLConverterWithAlign,
+            UploadHTMLConverter,
+            ...defaultConverters,
+          ];
+        },
+      }),
+    ],
+  }),
   db: mongooseAdapter({
     url: process.env.MONGODB_URI ?? false,
     migrationDir: path.resolve(__dirname, "migrations"),

@@ -192,7 +192,11 @@ export function Serialize({ nodes }: Props): JSX.Element {
               );
             } else if (fields.linkType === "internal") {
               return (
-                <Link key={index} to={fields.doc.value.url}>
+                <Link
+                  key={index}
+                  to={fields.doc.value.url}
+                  target={fields.newTab ? "_blank" : undefined}
+                >
                   {serializedChildren}
                 </Link>
               );
@@ -214,7 +218,6 @@ export function Serialize({ nodes }: Props): JSX.Element {
                 return <YoutubeEmbed key={index} url={node?.fields.url} />;
 
               case "publications":
-                console.log(node.fields);
                 return (
                   <div key={index} className="mb-12 mt-6 space-y-8">
                     {node.fields.items.map(
@@ -241,6 +244,16 @@ export function Serialize({ nodes }: Props): JSX.Element {
                       ),
                     )}
                   </div>
+                );
+
+              case "foldable":
+                return (
+                  <details key={index}>
+                    <summary className="text-key-500 font-altsans mb-4 cursor-pointer pl-4 text-xl underline">
+                      {node.fields.title}
+                    </summary>
+                    <Serialize nodes={node.fields.content.root.children} />
+                  </details>
                 );
 
               default:
