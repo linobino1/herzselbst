@@ -24,7 +24,7 @@ const NavigationItem: React.FC<{
         <Navigation
           items={item.subnavigation}
           nested={true}
-          className={"pl-6 text-sm font-medium"}
+          className={"flex-col pl-6 text-sm font-medium"}
         />
       </div>
     );
@@ -44,7 +44,7 @@ const NavigationItem: React.FC<{
         to={(item.doc?.value as any).url}
         className={({ isActive }) => twMerge(isActive && "text-key-500")}
       >
-        {item.label}
+        {(item.doc?.value as any).title}
       </NavLink>
     );
   }

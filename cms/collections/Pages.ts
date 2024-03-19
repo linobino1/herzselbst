@@ -10,6 +10,7 @@ import {
 import { HTMLConverterWithAlign } from "../lexical/HTMLConverterWithAlign";
 import { UploadHTMLConverter } from "../lexical/UploadHTMLCOnverter";
 import Video from "../blocks/Video";
+import Publications from "../blocks/Publications";
 
 const Pages: CollectionConfig = {
   slug: "pages",
@@ -58,12 +59,11 @@ const Pages: CollectionConfig = {
       ],
       required: false,
     },
-    // {
-    //   name: "layout",
-    //   label: "Layout",
-    //   type: "blocks",
-    //   blocks,
-    // },
+    {
+      name: "h1",
+      label: "Überschrift",
+      type: "text",
+    },
     {
       name: "content",
       label: "Inhalt",
@@ -75,7 +75,7 @@ const Pages: CollectionConfig = {
             enabledCollections: ["pages", "media"],
           }),
           BlocksFeature({
-            blocks: [Video],
+            blocks: [Video, Publications],
           }),
           HTMLConverterFeature({
             // @ts-ignore

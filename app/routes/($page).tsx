@@ -75,7 +75,7 @@ export default function Page() {
 
   return (
     <>
-      <h1 className="mb-12">{page?.title}</h1>
+      <h1 className="mb-12">{page?.h1}</h1>
       <div className="flex gap-16">
         <RichText content={page?.content} />
         {page?.images?.length ? (

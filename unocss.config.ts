@@ -19,7 +19,7 @@ export default defineConfig({
       fonts: {
         sans: {
           name: "Spartan",
-          weights: [400, 500],
+          weights: [400, 500, 700],
         },
         altsans: {
           name: "League Spartan",

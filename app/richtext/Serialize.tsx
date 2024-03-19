@@ -16,6 +16,8 @@ import type { SerializedLexicalNode } from "./types";
 import { twMerge } from "tailwind-merge";
 import { Link } from "@remix-run/react";
 import { YoutubeEmbed } from "~/components/YoutubeEmbed";
+import Image from "~/components/Image";
+import type { Publication } from "../../cms/blocks/Publications";
 
 interface Props {
   nodes: SerializedLexicalNode[];
@@ -210,6 +212,37 @@ export function Serialize({ nodes }: Props): JSX.Element {
             switch (node.fields.blockType) {
               case "video":
                 return <YoutubeEmbed key={index} url={node?.fields.url} />;
+
+              case "publications":
+                console.log(node.fields);
+                return (
+                  <div key={index} className="mb-12 mt-6 space-y-8">
+                    {node.fields.items.map(
+                      (item: Publication, subIndex: number) => (
+                        <div key={subIndex} className="flex gap-6">
+                          <Image
+                            media={item.image}
+                            className="w-24 object-contain"
+                          />
+                          <div>
+                            <div className="font-bold leading-snug">
+                              {item.title}
+                            </div>
+                            <p
+                              dangerouslySetInnerHTML={{
+                                __html: escapeHTML(item.description).replace(
+                                  /\n/g,
+                                  "<br>",
+                                ),
+                              }}
+                            />
+                          </div>
+                        </div>
+                      ),
+                    )}
+                  </div>
+                );
+
               default:
                 return (
                   <p key={index}>

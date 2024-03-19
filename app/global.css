@@ -6,15 +6,14 @@ html {
 }
 
 h1 {
-  @apply text-key-500 text-4xl leading-normal;
+  @apply text-key-500 text-4xl leading-snug;
 }
-h1,
+
 h2,
 h3,
 h4,
 h5,
 h6,
-.lexical h1,
 .lexical h2,
 .lexical h3,
 .lexical h4,
@@ -23,11 +22,22 @@ h6,
   @apply font-altsans;
 }
 
-.lexical > * {
+.lexical > p,
+.lexical > ul,
+.lexical > ol {
   all: revert;
 }
 .lexical p {
   min-height: 0.1px;
+}
+.lexical h3 {
+  @apply text-xl;
+}
+.lexical ul {
+  @apply pl-4;
+}
+.lexical li {
+  @apply max-w-lg;
 }
 .lexical .text-left {
   text-align: left;

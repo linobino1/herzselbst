@@ -5,7 +5,7 @@ const createNavigationField = (
   name: string,
   label: string,
   allowSubnavigation: boolean = true,
-  nested: boolean = false
+  nested: boolean = false,
 ): ArrayField => ({
   name,
   label,
@@ -54,7 +54,10 @@ const createNavigationField = (
       name: "label",
       label: "Bezeichnung",
       type: "text",
-      required: true,
+      admin: {
+        condition: (data: any, siblingData: any) =>
+          siblingData.type === "external",
+      },
     },
     // internal link
     {
