@@ -19,12 +19,12 @@ const NavigationItem: React.FC<{
     const category = item.category?.value as Category;
     const isActive = pathname.includes(category.slug || "");
     return (
-      <div className="transition-500 flex flex-col gap-2 transition-colors ease-in-out ">
+      <div className="flex flex-col gap-0 ">
         <NavLink
           to={category.url || ""}
           className={twMerge(
-            "hover:text-key-400",
-            isActive && "text-key-500 peer",
+            "hover:text-key-400 mb-2",
+            isActive && "text-key-500",
           )}
           prefetch="intent"
         >
@@ -34,7 +34,7 @@ const NavigationItem: React.FC<{
           items={item.subnavigation}
           nested={true}
           className={twMerge(
-            "transition-max-height max-h-[20em] flex-col overflow-hidden pl-6 text-sm font-medium duration-200 ease-in-out",
+            "transition-max-height max-h-[20em] flex-col gap-2 overflow-hidden pl-6 text-sm font-medium duration-500 ease-in-out",
             !isActive && "max-h-0",
           )}
         />
@@ -42,9 +42,17 @@ const NavigationItem: React.FC<{
     );
   }
 
+  const classes =
+    "hover:text-key-400 mb-2 transition-colors duration-200 ease-in-out";
+
   if (item.type === "external") {
     return (
-      <Link to={item.url || ""} target="_blank" rel="noopener noreferrer">
+      <Link
+        to={item.url || ""}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={classes}
+      >
         {item.label}
       </Link>
     );
@@ -55,7 +63,7 @@ const NavigationItem: React.FC<{
       <NavLink
         to={(item.doc?.value as any).url}
         className={({ isActive }) =>
-          twMerge("hover:text-key-400", isActive && "text-key-500")
+          twMerge(classes, isActive && "text-key-500")
         }
         prefetch="intent"
       >
