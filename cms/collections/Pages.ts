@@ -12,6 +12,9 @@ const Pages: CollectionConfig = {
     group: "Inhalte",
     useAsTitle: "title",
     defaultColumns: ["title", "slug", "category"],
+    pagination: {
+      defaultLimit: 50,
+    },
   },
   access: publicReadOnly,
   custom: {

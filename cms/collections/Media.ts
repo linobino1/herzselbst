@@ -9,6 +9,9 @@ export const Media: CollectionConfig = {
   },
   admin: {
     group: "Inhalte",
+    pagination: {
+      defaultLimit: 50,
+    },
   },
   access: publicReadOnly,
   upload: {
