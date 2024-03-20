@@ -251,7 +251,7 @@ export function Serialize({ nodes }: Props): JSX.Element {
               case "foldable":
                 return (
                   <details key={index}>
-                    <summary className="text-key-500 font-altsans mb-4 cursor-pointer pl-4 text-xl underline">
+                    <summary className="text-key-500 font-altsans mb-4 cursor-pointer text-xl underline">
                       {node.fields.title}
                     </summary>
                     <div className="pb-4">
