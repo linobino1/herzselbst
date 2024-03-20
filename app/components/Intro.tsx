@@ -18,7 +18,7 @@ const Intro = () => {
     // hide intro after x seconds
     setTimeout(() => {
       setHide(true);
-    }, 3000);
+    }, 5000);
   }, []);
 
   return (
