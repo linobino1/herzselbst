@@ -341,7 +341,7 @@ export function Serialize({ nodes }: Props): JSX.Element {
                       <div key={subIndex} className="flex flex-col gap-4">
                         <div
                           className={twMerge(
-                            "border-key-500 w-full lg:hidden",
+                            "border-key-500 w-full md:hidden",
                             subIndex > 0 && "border-t-1 mb-2 pb-2",
                           )}
                         />
