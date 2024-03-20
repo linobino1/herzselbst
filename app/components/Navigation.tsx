@@ -62,8 +62,8 @@ const NavigationItem: React.FC<{
     return (
       <NavLink
         to={(item.doc?.value as any).url}
-        className={({ isActive }) =>
-          twMerge(classes, isActive && "text-key-500")
+        className={({ isActive, isPending }) =>
+          twMerge(classes, (isActive || isPending) && "text-key-500")
         }
         prefetch="intent"
       >
