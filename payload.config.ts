@@ -24,6 +24,8 @@ import { UploadHTMLConverter } from "./cms/lexical/UploadHTMLCOnverter";
 import Video from "./cms/blocks/Video";
 import Publications from "./cms/blocks/Publications";
 import Foldable from "./cms/blocks/Foldable";
+import Button from "./cms/blocks/Button";
+import Review from "./cms/blocks/Review";
 
 export default buildConfig({
   rateLimit: {
@@ -52,7 +54,7 @@ export default buildConfig({
         enabledCollections: ["pages", "media"],
       }),
       BlocksFeature({
-        blocks: [Video, Publications, Foldable],
+        blocks: [Video, Publications, Foldable, Button, Review],
       }),
       HTMLConverterFeature({
         // @ts-ignore

@@ -20,6 +20,7 @@ export default defineConfig({
         sans: {
           name: "Spartan",
           weights: [400, 500, 700],
+          italic: true,
         },
         altsans: {
           name: "League Spartan",

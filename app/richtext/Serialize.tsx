@@ -186,6 +186,7 @@ export function Serialize({ nodes }: Props): JSX.Element {
                   href={fields.url}
                   target={fields.newTab ? 'target="_blank"' : undefined}
                   rel={rel}
+                  className="text-key-500 underline"
                 >
                   {serializedChildren}
                 </a>
@@ -196,6 +197,7 @@ export function Serialize({ nodes }: Props): JSX.Element {
                   key={index}
                   to={fields.doc.value.url}
                   target={fields.newTab ? "_blank" : undefined}
+                  className="text-key-500 underline"
                 >
                   {serializedChildren}
                 </Link>
@@ -256,6 +258,61 @@ export function Serialize({ nodes }: Props): JSX.Element {
                       <Serialize nodes={node.fields.content.root.children} />
                     </div>
                   </details>
+                );
+
+              case "button":
+                return (
+                  <a
+                    key={index}
+                    href={
+                      node.fields.link.url || node.fields.link.doc.value.url
+                    }
+                    rel={
+                      node.fields.link.url
+                        ? "noopener noreferrer nofollow"
+                        : undefined
+                    }
+                    target={node.fields.link.newTab ? "_blank" : undefined}
+                    className="bg-key-500 font-altsans hover:bg-key-600 my-4 flex w-fit max-w-full cursor-pointer rounded-sm px-4 py-2 text-center text-white underline transition-colors"
+                  >
+                    {node.fields.label}
+                  </a>
+                );
+
+              case "review":
+                return (
+                  <div key={index} className="mb-8 mt-4 flex flex-col gap-4">
+                    <div
+                      className="text-sm italic leading-loose text-gray-600"
+                      dangerouslySetInnerHTML={{
+                        __html: `„${escapeHTML(node.fields.content).replace(
+                          /\n/g,
+                          "<br>",
+                        )}“`,
+                      }}
+                    />
+                    <div className="flex items-center gap-4">
+                      <Image
+                        media={node.fields.author.image}
+                        className="aspect-1/1 w-16 rounded-full object-cover"
+                      />
+                      <div className="flex flex-col">
+                        <div className="text-key-500 text-sm leading-snug">
+                          {node.fields.author.name}
+                        </div>
+                        {node.fields.author.about && (
+                          <div
+                            className="text-xs leading-relaxed text-gray-600"
+                            dangerouslySetInnerHTML={{
+                              __html: escapeHTML(
+                                node.fields.author.about,
+                              ).replace(/\n/g, "<br>"),
+                            }}
+                          />
+                        )}
+                      </div>
+                    </div>
+                  </div>
                 );
 
               default:

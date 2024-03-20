@@ -69,6 +69,17 @@ const Pages: CollectionConfig = {
       required: false,
     },
     {
+      name: "sidebar",
+      type: "group",
+      fields: [
+        {
+          name: "content",
+          label: "Inhalt",
+          type: "richText",
+        },
+      ],
+    },
+    {
       name: "h1",
       label: "Überschrift",
       type: "text",

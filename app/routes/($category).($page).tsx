@@ -128,15 +128,18 @@ export default function Page() {
       <h1 className="mb-12">{page?.h1}</h1>
       <div className="flex gap-16">
         <RichText content={page?.content} />
-        {page?.images?.length ? (
-          <div className="shrink-0 space-y-16 p-2">
-            {page.images.map((image) => (
+        {page?.images?.length || page?.sidebar?.content ? (
+          <div className="flex w-40 shrink-0 flex-col items-center gap-16 p-2">
+            {(page.images || []).map((image) => (
               <Image
                 media={image.image as Media}
                 key={image.id}
-                className="w-38 h-38 mb-4 rounded-full object-cover"
+                className="aspect-1/1 w-full rounded-full object-cover"
               />
             ))}
+            {page.sidebar?.content && (
+              <RichText content={page.sidebar.content} className="w-40" />
+            )}
           </div>
         ) : null}
       </div>
