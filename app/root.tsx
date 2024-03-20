@@ -18,6 +18,9 @@ import Image from "./components/Image";
 import Navigation from "./components/Navigation";
 import Intro from "./components/Intro";
 import Cookies, { CookieConsentProvider } from "./providers/Cookies";
+import { Squash as Hamburger } from "hamburger-react";
+import { useEffect, useState } from "react";
+import { twMerge } from "tailwind-merge";
 
 export async function loader({ context: { payload } }: LoaderFunctionArgs) {
   const [site, navigations] = await Promise.all([
@@ -46,6 +49,21 @@ export default function App() {
   const { ENV, site, navigations } = useLoaderData<typeof loader>();
   const { pathname } = useLocation();
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+    if (isMenuOpen) {
+      document.body.style.overflow = "auto";
+    } else {
+      document.body.style.overflow = "hidden";
+    }
+  };
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+    document.body.style.overflow = "auto";
+  }, [pathname]);
+
   return (
     <html lang="de" className="font-sans text-gray-800">
       <head>
@@ -62,33 +80,47 @@ export default function App() {
       <CookieConsentProvider>
         <body>
           {pathname === "/" && <Intro />}
-          <div className="mx-auto flex w-full max-w-[1320px]">
-            <aside className="sticky top-0 flex h-[100vh] flex-col px-4 pt-12 lg:px-8">
+          <div className="mx-auto w-full max-w-[1320px] lg:flex">
+            <aside className="border-b-1 border-key-500 top-0 flex flex-col px-4 pt-12 lg:sticky lg:h-[100vh] lg:border-none lg:px-8">
               <NavLink to="/" prefetch="intent" className="self-center">
                 {site.logo && <Image media={site.logo as Media} />}
               </NavLink>
-              <div className="mt-12 w-full flex-1 overflow-y-auto sm:pl-6 lg:pl-12">
-                <Navigation
-                  items={navigations.main}
-                  className="flex-col text-lg text-gray-500"
+              <div className="fixed right-0 top-0 z-50 p-4">
+                <Hamburger
+                  onToggle={toggleMenu}
+                  toggled={isMenuOpen}
+                  color="#DEB754"
                 />
               </div>
-              <div className="text-key-500 font-altsans w-full space-y-2 py-8 sm:pl-6 lg:pl-12">
-                <div className="flex items-center gap-2">
-                  <div className="i-ion:ios-call text-xl" />
-                  <a href={`tel:${site.contact?.phone}`}>
-                    {site.contact?.phone}
-                  </a>
+              <div
+                className={twMerge(
+                  "z-49 fixed right-0 top-0 h-[100vh] translate-x-0 overflow-y-auto bg-white px-8 pt-32 shadow-lg transition-transform max-sm:w-full lg:contents lg:text-start",
+                  !isMenuOpen && "translate-x-full shadow-none",
+                )}
+              >
+                <div className="mt-12 w-full flex-1 overflow-y-auto sm:pl-6 lg:pl-12">
+                  <Navigation
+                    items={navigations.main}
+                    className="flex-col text-end text-lg text-gray-500 lg:text-start"
+                  />
                 </div>
-                <div className="flex items-center gap-2">
-                  <div className="i-ion:md-mail text-xl" />
-                  <a href={`mailto:${site.contact?.email}`}>
-                    {site.contact?.email}
-                  </a>
+                <div className="text-key-500 font-altsans w-full space-y-2 py-8 sm:pl-6 lg:pl-12">
+                  <div className="flex items-center gap-2">
+                    <div className="i-ion:ios-call text-xl" />
+                    <a href={`tel:${site.contact?.phone}`}>
+                      {site.contact?.phone}
+                    </a>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="i-ion:md-mail text-xl" />
+                    <a href={`mailto:${site.contact?.email}`}>
+                      {site.contact?.email}
+                    </a>
+                  </div>
                 </div>
               </div>
             </aside>
-            <div className="border-l-1 border-key-200 flex min-h-[100vh] w-full flex-col">
+            <div className="lg:border-l-1 border-key-200 flex min-h-[100vh] w-full flex-col">
               <div className="flex-1 px-8 pt-32 lg:px-16">
                 <Outlet />
               </div>

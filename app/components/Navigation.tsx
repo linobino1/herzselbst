@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import type { Navigations, Category } from "payload/generated-types";
 import { Link, NavLink, useLocation } from "@remix-run/react";
 import { twMerge } from "tailwind-merge";
@@ -19,27 +19,48 @@ const NavigationItem: React.FC<ItemProps> = ({
   activeClassName = "text-key-500",
 }) => {
   const { pathname } = useLocation();
+  const [isToggled, setIsToggled] = useState<Record<string, boolean>>({});
 
   if (item.type === "subnavigation") {
     const category = item.category?.value as Category;
     const isActive = pathname.includes(category.slug || "");
     return (
       <div className="flex flex-col gap-0 ">
-        <NavLink
-          to={category.url || ""}
-          className={twMerge(
-            "hover:text-key-400 mb-2",
-            isActive && activeClassName,
-          )}
-          prefetch="intent"
-        >
-          {category.title}
-        </NavLink>
+        <div className="flex items-start justify-between gap-8 lg:contents">
+          <button
+            onClick={() =>
+              setIsToggled((prev) => ({
+                ...prev,
+                [item.id || ""]: !prev[item.id || ""],
+              }))
+            }
+            className="flex items-center"
+          >
+            <div
+              className={twMerge(
+                "mt-0.5 text-xl text-gray-300 lg:hidden",
+                isActive || isToggled[item.id || ""]
+                  ? "i-ion:minus"
+                  : "i-ion:plus",
+              )}
+            />
+          </button>
+          <NavLink
+            to={category.url || ""}
+            className={twMerge(
+              "hover:text-key-400 mb-2",
+              isActive && activeClassName,
+            )}
+            prefetch="intent"
+          >
+            {category.title}
+          </NavLink>
+        </div>
         <Navigation
           items={item.subnavigation}
           className={twMerge(
             "transition-max-height max-h-[20em] flex-col gap-2 overflow-hidden pl-6 text-sm font-medium duration-500 ease-in-out",
-            !isActive && "max-h-0",
+            !isActive && !isToggled[item.id || ""] && "max-h-0",
           )}
         />
       </div>
