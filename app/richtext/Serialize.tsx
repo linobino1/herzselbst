@@ -241,7 +241,7 @@ export function Serialize({ nodes }: Props): JSX.Element {
                         <div key={subIndex} className="flex gap-6">
                           <Image
                             media={item.image}
-                            className="w-24 object-contain"
+                            className="w-24 self-start object-contain"
                           />
                           <div>
                             <div className="font-bold leading-snug">
@@ -254,6 +254,7 @@ export function Serialize({ nodes }: Props): JSX.Element {
                                   "<br>",
                                 ),
                               }}
+                              className="text-sm"
                             />
                           </div>
                         </div>
@@ -333,11 +334,17 @@ export function Serialize({ nodes }: Props): JSX.Element {
                   <div
                     key={index}
                     className={twMerge(
-                      `my-8 grid w-full grid-cols-1 md:auto-cols-fr md:grid-flow-col md:gap-8 lg:my-16`,
+                      `lg:my-x-16 my-8 grid w-full grid-cols-1 md:auto-cols-fr md:grid-flow-col md:gap-x-8`,
                     )}
                   >
                     {node.fields.items.map((item: any, subIndex: number) => (
                       <div key={subIndex} className="flex flex-col gap-4">
+                        <div
+                          className={twMerge(
+                            "border-key-500 w-full lg:hidden",
+                            subIndex > 0 && "border-t-1 mb-2 pb-2",
+                          )}
+                        />
                         <Image
                           media={item.image}
                           className="aspect-1/1 w-36 rounded-full object-cover"

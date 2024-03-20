@@ -126,12 +126,12 @@ export default function Page() {
 
   return (
     <>
-      <h1 className="mb-12">{page?.h1}</h1>
+      <h1 className="mb-4 lg:mb-12">{page?.h1}</h1>
       <div className="flex gap-16">
         <RichText content={page?.content} className="w-full" />
         {page?.images?.length ||
         (page?.sidebar?.content && !isEmpty(page?.sidebar?.content)) ? (
-          <div className="flex w-40 shrink-0 flex-col items-center gap-16 p-2">
+          <div className="hidden w-40 shrink-0 flex-col items-center gap-16 p-2 lg:flex">
             {(page.images || []).map((image) => (
               <Image
                 media={image.image as Media}

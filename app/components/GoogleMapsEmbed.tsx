@@ -24,12 +24,13 @@ export const GoogleMapsEmbed: React.FC<Props> = ({
       {consent || oneTimeConsent ? (
         <iframe
           src={embedUrl}
-          width="600"
+          // width="600"
           title="Google Maps"
-          height="450"
+          // height="450"
           loading="lazy"
           allowFullScreen={false}
           referrerPolicy="no-referrer-when-downgrade"
+          className="min-h-96 w-full"
         />
       ) : (
         <div className="aspect-3/2 relative flex flex-col items-center justify-center justify-center p-4">

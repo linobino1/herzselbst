@@ -136,7 +136,7 @@ const Newsletter: React.FC<Props> = ({
             </Form>
           )}
         </div>
-        <div className="flex w-40 shrink-0 flex-col items-center gap-16 p-2">
+        <div className="hidden w-40 shrink-0 flex-col items-center gap-16 p-2 lg:flex">
           {images.map((image, index) => (
             <Image
               media={image.image}

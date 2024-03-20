@@ -6,7 +6,7 @@ html {
 }
 
 h1 {
-  @apply text-key-500 text-4xl leading-snug;
+  @apply text-key-500 text-2xl font-medium leading-snug lg:text-4xl lg:font-normal;
 }
 
 h2,

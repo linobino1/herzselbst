@@ -18,7 +18,7 @@ import Image from "./components/Image";
 import Navigation from "./components/Navigation";
 import Intro from "./components/Intro";
 import Cookies, { CookieConsentProvider } from "./providers/Cookies";
-import { Squash as Hamburger } from "hamburger-react";
+import { Cross as Hamburger } from "hamburger-react";
 import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -81,15 +81,20 @@ export default function App() {
         <body>
           {pathname === "/" && <Intro />}
           <div className="mx-auto w-full max-w-[1320px] lg:flex">
-            <aside className="border-b-1 border-key-500 top-0 flex flex-col px-4 pt-12 lg:sticky lg:h-[100vh] lg:border-none lg:px-8">
-              <NavLink to="/" prefetch="intent" className="self-center">
+            <aside className="border-b-1 border-key-500 top-0 flex flex-col px-4 pt-4 lg:sticky lg:h-[100vh] lg:border-none lg:px-8 lg:pt-12">
+              <NavLink
+                to="/"
+                prefetch="intent"
+                className="self-center pb-4 lg:pb-0"
+              >
                 {site.logo && <Image media={site.logo as Media} />}
               </NavLink>
-              <div className="fixed right-0 top-0 z-50 p-4">
+              <div className="fixed right-0 top-0 z-50 bg-white p-4">
                 <Hamburger
                   onToggle={toggleMenu}
                   toggled={isMenuOpen}
                   color="#DEB754"
+                  distance={"sm"}
                 />
               </div>
               <div
@@ -121,16 +126,16 @@ export default function App() {
               </div>
             </aside>
             <div className="lg:border-l-1 border-key-200 flex min-h-[100vh] w-full flex-col">
-              <div className="flex-1 px-8 pt-32 lg:px-16">
+              <div className="flex-1 px-4 pt-12 lg:px-16 lg:px-8 lg:pt-32">
                 <Outlet />
               </div>
               <footer className="bg-key-500 font-altsans mt-16 flex flex-col items-center p-4 text-sm text-white">
                 <Navigation
                   items={navigations.footer}
-                  className="flex gap-4"
+                  className="flex flex-wrap justify-center gap-x-4 gap-y-0 pb-4 lg:pb-0"
                   activeClassName="underline"
                 />
-                <p>
+                <p className="text-center">
                   Copyright ©{new Date().getFullYear()} Praxis und Schule für
                   transpersonale Psychologie. Alle Rechte vorbehalten.
                 </p>
