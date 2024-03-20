@@ -19,6 +19,7 @@ import { YoutubeEmbed } from "~/components/YoutubeEmbed";
 import Image from "~/components/Image";
 import type { Publication } from "../../cms/blocks/Publications";
 import Newsletter from "~/components/Newsletter";
+import Gallery from "~/components/Gallery";
 
 interface Props {
   nodes: SerializedLexicalNode[];
@@ -347,6 +348,9 @@ export function Serialize({ nodes }: Props): JSX.Element {
 
               case "newsletter":
                 return <Newsletter key={index} {...node.fields} />;
+
+              case "gallery":
+                return <Gallery key={index} images={node.fields.items} />;
 
               default:
                 return (

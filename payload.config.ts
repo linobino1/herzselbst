@@ -28,6 +28,7 @@ import Button from "./cms/blocks/Button";
 import Review from "./cms/blocks/Review";
 import CTAColumns from "./cms/blocks/CTAColumns";
 import Newsletter from "./cms/blocks/Newsletter";
+import Gallery from "./cms/blocks/Gallery";
 
 export default buildConfig({
   rateLimit: {
@@ -64,6 +65,7 @@ export default buildConfig({
           Review,
           Video,
           Newsletter,
+          Gallery,
         ],
       }),
       HTMLConverterFeature({
