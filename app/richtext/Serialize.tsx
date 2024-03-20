@@ -18,6 +18,7 @@ import { Link } from "@remix-run/react";
 import { YoutubeEmbed } from "~/components/YoutubeEmbed";
 import Image from "~/components/Image";
 import type { Publication } from "../../cms/blocks/Publications";
+import Newsletter from "~/components/Newsletter";
 
 interface Props {
   nodes: SerializedLexicalNode[];
@@ -126,7 +127,11 @@ export function Serialize({ nodes }: Props): JSX.Element {
               "h1" | "h2" | "h3" | "h4" | "h5"
             >;
             const Tag = node?.tag as Heading;
-            return <Tag key={index}>{serializedChildren}</Tag>;
+            return (
+              <Tag key={index} className={className}>
+                {serializedChildren}
+              </Tag>
+            );
           }
           case "list": {
             type List = Extract<keyof JSX.IntrinsicElements, "ul" | "ol">;
@@ -198,6 +203,7 @@ export function Serialize({ nodes }: Props): JSX.Element {
                   to={fields.doc.value.url}
                   target={fields.newTab ? "_blank" : undefined}
                   className="text-key-500 underline"
+                  prefetch="intent"
                 >
                   {serializedChildren}
                 </Link>
@@ -262,11 +268,10 @@ export function Serialize({ nodes }: Props): JSX.Element {
 
               case "button":
                 return (
-                  <a
+                  <Link
                     key={index}
-                    href={
-                      node.fields.link.url || node.fields.link.doc.value.url
-                    }
+                    to={node.fields.link.url || node.fields.link.doc.value.url}
+                    prefetch={node.fields.link.doc ? "intent" : undefined}
                     rel={
                       node.fields.link.url
                         ? "noopener noreferrer nofollow"
@@ -276,7 +281,7 @@ export function Serialize({ nodes }: Props): JSX.Element {
                     className="bg-key-500 font-altsans hover:bg-key-600 my-4 flex w-fit max-w-full cursor-pointer rounded-sm px-4 py-2 text-center text-white underline transition-colors"
                   >
                     {node.fields.label}
-                  </a>
+                  </Link>
                 );
 
               case "review":
@@ -314,6 +319,34 @@ export function Serialize({ nodes }: Props): JSX.Element {
                     </div>
                   </div>
                 );
+
+              case "ctaColumns":
+                return (
+                  <div
+                    key={index}
+                    className={twMerge(
+                      `my-8 grid w-full grid-cols-1 md:auto-cols-fr md:grid-flow-col md:gap-8 lg:my-16`,
+                    )}
+                  >
+                    {node.fields.items.map((item: any, subIndex: number) => (
+                      <div key={subIndex} className="flex flex-col gap-4">
+                        <Image
+                          media={item.image}
+                          className="aspect-1/1 w-36 rounded-full object-cover"
+                        />
+                        <div className="font-altsans">
+                          <div className="font-bold leading-snug">
+                            {item.title}
+                          </div>
+                          <Serialize nodes={item.content.root.children} />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                );
+
+              case "newsletter":
+                return <Newsletter key={index} {...node.fields} />;
 
               default:
                 return (

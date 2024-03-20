@@ -32,13 +32,17 @@ h6 {
   min-height: 0.1px;
 }
 .lexical h2 {
-  @apply text-2xl;
+  @apply text-2xl leading-tight;
 }
 .lexical h3 {
-  @apply text-xl;
+  @apply text-xl leading-tight;
 }
 .lexical h4 {
-  @apply text-lg;
+  @apply text-lg leading-tight;
+}
+.lexical h5,
+.lexical h6 {
+  @apply text-base leading-tight;
 }
 .lexical ul,
 .lexical ol {
@@ -47,6 +51,9 @@ h6 {
 }
 .lexical li {
   @apply max-w-lg;
+}
+.lexical button {
+  @apply bg-key-500 hover:bg-key-600 rounded-sm px-4 py-2 text-white;
 }
 .lexical .text-left {
   text-align: left;

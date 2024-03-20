@@ -18,7 +18,7 @@ export const YoutubeEmbed: React.FC<Props> = (props) => {
   }, []);
 
   return isClient ? (
-    <>
+    <div className="mb-16">
       {isLoading && <p className="-z-1 absolute">Lade Video...</p>}
       <ReactPlayer
         {...props}
@@ -33,6 +33,6 @@ export const YoutubeEmbed: React.FC<Props> = (props) => {
           {typeof props.url === "string" ? props.url : ""}
         </p>
       )}
-    </>
+    </div>
   ) : null;
 };

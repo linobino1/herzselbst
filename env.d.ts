@@ -26,12 +26,12 @@ interface PayloadRequest extends Express.Request {
 
 type GetLoadContextFunction = (
   req: PayloadRequest,
-  res: Response
+  res: Response,
 ) => Promise<AppLoadContext> | AppLoadContext;
 type RequestHandler = (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => Promise<void>;
 
 declare module "@remix-run/express" {

@@ -5,6 +5,7 @@ import {
   isRouteErrorResponse,
   useRouteError,
 } from "@remix-run/react";
+import isEmpty from "cms/lexical/isEmpty";
 import type { Media, Page } from "payload/generated-types";
 import Image from "~/components/Image";
 import RichText from "~/components/RichText";
@@ -127,8 +128,9 @@ export default function Page() {
     <>
       <h1 className="mb-12">{page?.h1}</h1>
       <div className="flex gap-16">
-        <RichText content={page?.content} />
-        {page?.images?.length || page?.sidebar?.content ? (
+        <RichText content={page?.content} className="w-full" />
+        {page?.images?.length ||
+        (page?.sidebar?.content && !isEmpty(page?.sidebar?.content)) ? (
           <div className="flex w-40 shrink-0 flex-col items-center gap-16 p-2">
             {(page.images || []).map((image) => (
               <Image

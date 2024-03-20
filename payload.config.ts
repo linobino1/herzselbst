@@ -26,6 +26,8 @@ import Publications from "./cms/blocks/Publications";
 import Foldable from "./cms/blocks/Foldable";
 import Button from "./cms/blocks/Button";
 import Review from "./cms/blocks/Review";
+import CTAColumns from "./cms/blocks/CTAColumns";
+import Newsletter from "./cms/blocks/Newsletter";
 
 export default buildConfig({
   rateLimit: {
@@ -54,7 +56,15 @@ export default buildConfig({
         enabledCollections: ["pages", "media"],
       }),
       BlocksFeature({
-        blocks: [Video, Publications, Foldable, Button, Review],
+        blocks: [
+          Button,
+          CTAColumns,
+          Foldable,
+          Publications,
+          Review,
+          Video,
+          Newsletter,
+        ],
       }),
       HTMLConverterFeature({
         // @ts-ignore
