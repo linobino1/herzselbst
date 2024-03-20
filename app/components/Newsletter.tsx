@@ -53,7 +53,7 @@ const Newsletter: React.FC<Props> = ({
                 value={fields.ANREDE}
                 onChange={handleFieldChange}
                 placeholder="Anrede"
-                //   required
+                required
                 className={twMerge(inputClass)}
               />
               <label htmlFor="FNAME" className={twMerge(labelClass)}>
@@ -66,7 +66,7 @@ const Newsletter: React.FC<Props> = ({
                 value={fields.FNAME}
                 onChange={handleFieldChange}
                 placeholder="Vorname"
-                //   required
+                required
                 className={twMerge(inputClass)}
               />
               <label htmlFor="LNAME" className={twMerge(labelClass)}>
@@ -79,7 +79,7 @@ const Newsletter: React.FC<Props> = ({
                 value={fields.LNAME}
                 onChange={handleFieldChange}
                 placeholder="Nachname"
-                //   required
+                required
                 className={twMerge(inputClass)}
               />
               <label htmlFor="EMAIL" className={twMerge(labelClass)}>
@@ -92,7 +92,7 @@ const Newsletter: React.FC<Props> = ({
                 value={fields.EMAIL}
                 onChange={handleFieldChange}
                 placeholder="E-Mail Adresse"
-                //   required
+                required
                 className={twMerge(inputClass)}
               />
               <label
