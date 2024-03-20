@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { type YouTubePlayerProps } from "react-player/youtube";
 import ReactPlayer from "react-player/youtube";
-import { twMerge } from "tailwind-merge";
 
 export interface Props extends YouTubePlayerProps {}
 
@@ -19,7 +18,7 @@ export const YoutubeEmbed: React.FC<Props> = (props) => {
   }, []);
 
   return isClient ? (
-    <div className={twMerge("min-h-20 bg-black text-white")}>
+    <>
       {isLoading && <p className="-z-1 absolute">Lade Video...</p>}
       <ReactPlayer
         {...props}
@@ -34,6 +33,6 @@ export const YoutubeEmbed: React.FC<Props> = (props) => {
           {typeof props.url === "string" ? props.url : ""}
         </p>
       )}
-    </div>
+    </>
   ) : null;
 };
