@@ -3,16 +3,21 @@ import type { Navigations, Category } from "payload/generated-types";
 import { Link, NavLink, useLocation } from "@remix-run/react";
 import { twMerge } from "tailwind-merge";
 
-type Props = {
-  items: Navigations["main" | "footer"];
-  nested?: boolean;
-  className?: string;
+type ItemProps = {
+  item: NonNullable<Navigations["main"]>[0];
+  activeClassName?: string;
 };
 
-const NavigationItem: React.FC<{
-  item: NonNullable<Navigations["main"]>[0];
-  nested: boolean;
-}> = ({ item }) => {
+type Props = {
+  items: Navigations["main" | "footer"];
+  className?: string;
+  activeClassName?: string;
+};
+
+const NavigationItem: React.FC<ItemProps> = ({
+  item,
+  activeClassName = "text-key-500",
+}) => {
   const { pathname } = useLocation();
 
   if (item.type === "subnavigation") {
@@ -24,7 +29,7 @@ const NavigationItem: React.FC<{
           to={category.url || ""}
           className={twMerge(
             "hover:text-key-400 mb-2",
-            isActive && "text-key-500",
+            isActive && activeClassName,
           )}
           prefetch="intent"
         >
@@ -32,7 +37,6 @@ const NavigationItem: React.FC<{
         </NavLink>
         <Navigation
           items={item.subnavigation}
-          nested={true}
           className={twMerge(
             "transition-max-height max-h-[20em] flex-col gap-2 overflow-hidden pl-6 text-sm font-medium duration-500 ease-in-out",
             !isActive && "max-h-0",
@@ -49,7 +53,7 @@ const NavigationItem: React.FC<{
     return (
       <Link
         to={item.url || ""}
-        target="_blank"
+        target={item.newTab ? "_blank" : "_self"}
         rel="noopener noreferrer"
         className={classes}
       >
@@ -63,7 +67,7 @@ const NavigationItem: React.FC<{
       <NavLink
         to={(item.doc?.value as any).url}
         className={({ isActive, isPending }) =>
-          twMerge(classes, (isActive || isPending) && "text-key-500")
+          twMerge(classes, (isActive || isPending) && activeClassName)
         }
         prefetch="intent"
       >
@@ -77,14 +81,18 @@ const NavigationItem: React.FC<{
 
 export const Navigation: React.FC<Props> = ({
   items,
-  nested = false,
+  activeClassName,
   className,
 }) => {
   // each item renders as either an internal link, an external link with an icon or text, or another navigation
   return items ? (
     <nav className={twMerge("flex gap-4", className)}>
       {items?.map((item) => (
-        <NavigationItem item={item} key={item.id} nested={nested} />
+        <NavigationItem
+          item={item}
+          key={item.id}
+          activeClassName={activeClassName}
+        />
       ))}
     </nav>
   ) : (

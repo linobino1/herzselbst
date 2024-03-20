@@ -17,6 +17,7 @@ import type { Media } from "payload/generated-types";
 import Image from "./components/Image";
 import Navigation from "./components/Navigation";
 import Intro from "./components/Intro";
+import Cookies, { CookieConsentProvider } from "./providers/Cookies";
 
 export async function loader({ context: { payload } }: LoaderFunctionArgs) {
   const [site, navigations] = await Promise.all([
@@ -58,48 +59,57 @@ export default function App() {
           }}
         />
       </head>
-      <body>
-        {pathname === "/" && <Intro />}
-        <div className="mx-auto grid h-[100vh] w-full max-w-[1320px] grid-cols-[300px_calc(100%_-_300px)] overflow-hidden lg:grid-cols-[380px_calc(100%_-_380px)]">
-          <aside className="border-r-1 border-key-200 flex h-[100vh] flex-col overflow-y-visible px-4 pt-12 lg:px-8">
-            <NavLink to="/" prefetch="intent" className="self-center">
-              {site.logo && <Image media={site.logo as Media} />}
-            </NavLink>
-            <div className="mt-12 w-full flex-1 sm:pl-6 lg:pl-12">
-              <Navigation
-                items={navigations.main}
-                className="flex-col text-lg text-gray-500"
-              />
-            </div>
-            <div className="text-key-500 font-altsans space-y-2 py-8 sm:pl-6 lg:pl-12">
-              <div className="flex items-center gap-2">
-                <div className="i-ion:ios-call text-xl" />
-                <a href={`tel:${site.contact?.phone}`}>{site.contact?.phone}</a>
+      <CookieConsentProvider>
+        <body>
+          {pathname === "/" && <Intro />}
+          <div className="mx-auto grid h-[100vh] w-full max-w-[1320px] grid-cols-[300px_calc(100%_-_300px)] overflow-hidden lg:grid-cols-[380px_calc(100%_-_380px)]">
+            <aside className="border-r-1 border-key-200 flex h-[100vh] flex-col overflow-y-visible px-4 pt-12 lg:px-8">
+              <NavLink to="/" prefetch="intent" className="self-center">
+                {site.logo && <Image media={site.logo as Media} />}
+              </NavLink>
+              <div className="mt-12 w-full flex-1 sm:pl-6 lg:pl-12">
+                <Navigation
+                  items={navigations.main}
+                  className="flex-col text-lg text-gray-500"
+                />
               </div>
-              <div className="flex items-center gap-2">
-                <div className="i-ion:md-mail text-xl" />
-                <a href={`mailto:${site.contact?.email}`}>
-                  {site.contact?.email}
-                </a>
+              <div className="text-key-500 font-altsans space-y-2 py-8 sm:pl-6 lg:pl-12">
+                <div className="flex items-center gap-2">
+                  <div className="i-ion:ios-call text-xl" />
+                  <a href={`tel:${site.contact?.phone}`}>
+                    {site.contact?.phone}
+                  </a>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="i-ion:md-mail text-xl" />
+                  <a href={`mailto:${site.contact?.email}`}>
+                    {site.contact?.email}
+                  </a>
+                </div>
               </div>
+            </aside>
+            <div className="flex min-h-[100vh] flex-col overflow-y-auto">
+              <div className="flex-1 px-8 pt-32 lg:px-16">
+                <Outlet />
+              </div>
+              <footer className="bg-key-500 font-altsans mt-16 flex w-full flex-col items-center p-4 text-sm text-white">
+                <Navigation
+                  items={navigations.footer}
+                  className="flex gap-4"
+                  activeClassName="underline"
+                />
+                <p>
+                  Copyright ©{new Date().getFullYear()} Praxis und Schule für
+                  transpersonale Psychologie. Alle Rechte vorbehalten.
+                </p>
+              </footer>
             </div>
-          </aside>
-          <div className="flex min-h-[100vh] flex-col overflow-y-auto">
-            <div className="flex-1 px-8 pt-32 lg:px-16">
-              <Outlet />
-            </div>
-            <footer className="bg-key-500 font-altsans mt-16 flex w-full flex-col items-center gap-1 p-4 text-sm text-white">
-              <Navigation items={navigations.footer} className="flex gap-4" />
-              <p>
-                Copyright ©{new Date().getFullYear()} Praxis und Schule für
-                transpersonale Psychologie. Alle Rechte vorbehalten.
-              </p>
-            </footer>
           </div>
-        </div>
-        <ScrollRestoration />
-        <Scripts />
-      </body>
+          <ScrollRestoration />
+          <Scripts />
+          <Cookies />
+        </body>
+      </CookieConsentProvider>
     </html>
   );
 }

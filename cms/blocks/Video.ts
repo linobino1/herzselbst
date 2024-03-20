@@ -8,6 +8,13 @@ export const Video: Block = {
       type: "text",
       required: true,
     },
+    {
+      name: "pagePrivacy",
+      label: "Datenschutzseite",
+      type: "relationship",
+      relationTo: "pages",
+      required: true,
+    },
   ],
 };
 

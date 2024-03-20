@@ -29,7 +29,7 @@ const Newsletter: React.FC<Props> = ({
   const labelClass = "sr-only";
   const inputClass = "w-full p-2 border border-gray-300 rounded-md text-xs";
   return (
-    <div className="my-16">
+    <div id="newsletter" className="my-16">
       <div className="flex gap-16">
         <div className="w-full">
           <h2 className="">{title}</h2>

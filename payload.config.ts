@@ -29,6 +29,7 @@ import Review from "./cms/blocks/Review";
 import CTAColumns from "./cms/blocks/CTAColumns";
 import Newsletter from "./cms/blocks/Newsletter";
 import Gallery from "./cms/blocks/Gallery";
+import GoogleMaps from "./cms/blocks/GoogleMaps";
 
 export default buildConfig({
   rateLimit: {
@@ -61,11 +62,12 @@ export default buildConfig({
           Button,
           CTAColumns,
           Foldable,
+          Gallery,
+          GoogleMaps,
           Publications,
           Review,
           Video,
           Newsletter,
-          Gallery,
         ],
       }),
       HTMLConverterFeature({

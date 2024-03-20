@@ -20,6 +20,7 @@ import Image from "~/components/Image";
 import type { Publication } from "../../cms/blocks/Publications";
 import Newsletter from "~/components/Newsletter";
 import Gallery from "~/components/Gallery";
+import GoogleMapsEmbed from "~/components/GoogleMapsEmbed";
 
 interface Props {
   nodes: SerializedLexicalNode[];
@@ -224,7 +225,13 @@ export function Serialize({ nodes }: Props): JSX.Element {
           case "block":
             switch (node.fields.blockType) {
               case "video":
-                return <YoutubeEmbed key={index} url={node?.fields.url} />;
+                return (
+                  <YoutubeEmbed
+                    key={index}
+                    url={node.fields.url}
+                    pagePrivacy={node.fields.pagePrivacy}
+                  />
+                );
 
               case "publications":
                 return (
@@ -351,6 +358,9 @@ export function Serialize({ nodes }: Props): JSX.Element {
 
               case "gallery":
                 return <Gallery key={index} images={node.fields.items} />;
+
+              case "googleMaps":
+                return <GoogleMapsEmbed key={index} {...node.fields} />;
 
               default:
                 return (
