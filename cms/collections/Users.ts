@@ -10,6 +10,7 @@ const Users: CollectionConfig = {
   auth: true,
   admin: {
     useAsTitle: "email",
+    group: "Einstellungen",
   },
   access: {
     // Only allow creation of users to non-admins if no users exist
