@@ -12,6 +12,10 @@ import { UploadHTMLConverter } from "../lexical/UploadHTMLCOnverter";
 
 export const Foldable: Block = {
   slug: "foldable",
+  labels: {
+    singular: "Einklappblock",
+    plural: "Einklappblöcke",
+  },
   fields: [
     {
       name: "title",
