@@ -131,19 +131,19 @@ export default function Page() {
         <RichText content={page?.content} className="w-full" />
         {page?.images?.length ||
         (page?.sidebar?.content && !isEmpty(page?.sidebar?.content)) ? (
-          <div className="hidden w-40 shrink-0 flex-col items-center gap-16 p-2 lg:flex">
+          <div className="hidden shrink-0 flex-col items-center gap-16 px-2 pt-8 lg:flex">
             {(page.images || []).map((image) => (
               <Image
                 media={image.image as Media}
                 key={image.id}
-                className="aspect-1/1 w-[135px] rounded-full object-cover"
+                className="aspect-1/1 w-[142px] rounded-full object-cover"
                 srcSet={[
                   {
-                    options: { width: 135, height: 135, fit: "crop" },
-                    size: "135w",
+                    options: { width: 142, height: 142, fit: "crop" },
+                    size: "142w",
                   },
                 ]}
-                sizes="135px"
+                sizes="142px"
               />
             ))}
             {page.sidebar?.content && (
