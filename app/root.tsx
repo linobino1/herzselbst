@@ -87,7 +87,7 @@ export default function App() {
         <body>
           {pathname === "/" && <Intro />}
           <div className="mx-auto w-full max-w-[1320px] lg:flex">
-            <aside className="border-b-1 border-key-500 top-0 flex flex-col px-4 pb-4 pt-4 lg:sticky lg:h-[100vh] lg:border-none lg:px-8 lg:pb-0 lg:pt-12">
+            <aside className="border-b-1 border-key-500 top-0 flex shrink-0 flex-col px-4 pb-4 pt-4 lg:sticky lg:h-[100vh] lg:border-none lg:px-12 lg:pb-0 lg:pt-12">
               <NavLink
                 to="/"
                 prefetch="intent"
@@ -112,10 +112,10 @@ export default function App() {
                 <div className="mt-12 w-full flex-1 overflow-y-auto sm:pl-6 lg:pl-12">
                   <Navigation
                     items={navigations.main}
-                    className="flex-col text-end text-lg text-gray-500 lg:text-start"
+                    className="flex-col gap-y-3 text-end text-lg text-gray-500 lg:text-start"
                   />
                 </div>
-                <div className="text-key-500 font-altsans w-full space-y-2 py-8 text-lg sm:pl-6 lg:pl-12 lg:text-sm">
+                <div className="text-key-500 font-altsans lg:text-md w-full space-y-2 py-8 text-lg sm:pl-6 lg:pl-12">
                   <div className="flex items-center justify-end gap-2 lg:justify-start">
                     <div className="i-ion:ios-call text-xl" />
                     <a href={`tel:${site.contact?.phone}`}>
@@ -132,7 +132,7 @@ export default function App() {
               </div>
             </aside>
             <div className="lg:border-l-1 border-key-200 flex min-h-[100vh] w-full flex-col">
-              <div className="flex-1 px-4 pt-12 lg:px-16 lg:px-8 lg:pt-32">
+              <div className="flex-1 px-4 pt-12 lg:px-12 lg:px-16 lg:pt-32">
                 <Outlet />
               </div>
               <footer className="bg-key-500 font-altsans text-md mt-16 flex flex-col items-center p-4 text-white lg:text-sm">
