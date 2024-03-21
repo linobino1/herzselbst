@@ -87,7 +87,7 @@ export default function App() {
         <body>
           {pathname === "/" && <Intro />}
           <div className="mx-auto w-full max-w-[1320px] lg:flex">
-            <aside className="border-b-1 border-key-500 top-0 flex shrink-0 flex-col px-4 pb-4 pt-4 lg:sticky lg:h-[100vh] lg:border-none lg:px-12 lg:pb-0 lg:pt-12">
+            <aside className="border-b-1 border-key-500 top-0 flex shrink-0 flex-col px-4 pb-4 pt-4 lg:sticky lg:h-[100vh] lg:border-none lg:pb-0 lg:pl-8 lg:pr-12 lg:pt-12">
               <NavLink
                 to="/"
                 prefetch="intent"
@@ -132,7 +132,7 @@ export default function App() {
               </div>
             </aside>
             <div className="lg:border-l-1 border-key-200 flex min-h-[100vh] w-full flex-col">
-              <div className="flex-1 px-4 pt-12 lg:px-12 lg:px-16 lg:pt-32">
+              <div className="flex-1 px-4 pt-12 lg:px-12 lg:px-16 lg:pt-36">
                 <Outlet />
               </div>
               <footer className="bg-key-500 font-altsans text-md mt-16 flex flex-col items-center p-4 text-white lg:text-sm">
