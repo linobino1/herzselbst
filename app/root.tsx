@@ -135,7 +135,7 @@ export default function App() {
                   className="flex flex-wrap justify-center gap-x-4 gap-y-0 pb-4 lg:pb-0"
                   activeClassName="underline"
                 />
-                <p className="text-center">
+                <p className="text-center leading-snug">
                   Copyright ©{new Date().getFullYear()} Praxis und Schule für
                   transpersonale Psychologie. Alle Rechte vorbehalten.
                 </p>
