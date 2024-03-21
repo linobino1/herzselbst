@@ -95,7 +95,7 @@ export default function App() {
               >
                 {site.logo && <Image media={site.logo as Media} />}
               </NavLink>
-              <div className="fixed right-0 top-0 z-50 bg-white p-4">
+              <div className="fixed right-0 top-0 z-50 bg-white p-4 lg:hidden">
                 <Hamburger
                   onToggle={toggleMenu}
                   toggled={isMenuOpen}
