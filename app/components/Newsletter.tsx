@@ -27,9 +27,10 @@ const Newsletter: React.FC<Props> = ({
   });
 
   const labelClass = "sr-only";
-  const inputClass = "w-full p-2 border border-gray-300 rounded-md text-xs";
+  const inputClass =
+    "w-full p-2 border border-gray-300 rounded-md text-[16px] lg:text-xs";
   return (
-    <div id="newsletter" className="my-16">
+    <div id="newsletter" className="my-12">
       <div className="flex gap-16">
         <div className="w-full">
           <h2 className="">{title}</h2>
