@@ -57,7 +57,7 @@ const Cookies = () => {
   };
 
   return consent === null ? (
-    <div className="border-1 fixed bottom-4 left-4 right-4 mx-auto w-full max-w-[90vw] rounded-md bg-white p-4 shadow-lg lg:max-w-[1024px]">
+    <div className="border-1 fixed bottom-4 left-4 right-4 mx-auto w-full max-w-[96vw] rounded-md bg-white p-4 shadow-lg lg:max-w-[1024px]">
       <p className="text-sm">
         Wir verwenden Cookies, um Ihnen ein optimales Webseiten Erlebnis zu
         bieten. Lesen Sie mehr in unserer{" "}
