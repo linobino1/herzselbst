@@ -69,6 +69,9 @@ export default function App() {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {(site.meta?.additionalMetaTags || []).map((tag) => (
+          <meta key={tag.key} name={tag.key} content={tag.value} />
+        ))}
         <Meta />
         <Links />
         <script

@@ -97,6 +97,31 @@ export default buildConfig({
     seoPlugin({
       globals: ["site"],
       uploadsCollection: "media",
+      fields: [
+        {
+          name: "additionalMetaTags",
+          label: "Zusätzliche Meta-Tags",
+          labels: {
+            singular: "Meta-Tag",
+            plural: "Meta-Tags",
+          },
+          type: "array",
+          fields: [
+            {
+              name: "key",
+              label: "Key",
+              type: "text",
+              required: true,
+            },
+            {
+              name: "value",
+              label: "Value",
+              type: "text",
+              required: true,
+            },
+          ],
+        },
+      ],
     }),
     cloudStorage({
       enabled: process.env.S3_ENABLED === "true",
