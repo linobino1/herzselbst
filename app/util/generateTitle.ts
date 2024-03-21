@@ -1,5 +1,6 @@
 import type { Site } from "payload/generated-types";
 
 export default function generateTitle(site: Site, doc: any) {
-  return [doc?.title, site?.meta?.title].filter(Boolean).join(" · ");
+  let docTitle = doc?.slug !== "home" ? doc?.title : null;
+  return [docTitle, site?.meta?.title].filter(Boolean).join(" · ");
 }
