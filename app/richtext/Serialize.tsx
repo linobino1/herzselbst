@@ -308,7 +308,14 @@ export function Serialize({ nodes }: Props): JSX.Element {
                     <div className="flex items-center gap-4">
                       <Image
                         media={node.fields.author.image}
-                        className="aspect-1/1 w-16 rounded-full object-cover"
+                        className="aspect-1/1 w-[60px] rounded-full object-cover"
+                        srcSet={[
+                          {
+                            options: { width: 60, height: 60, fit: "crop" },
+                            size: "60w",
+                          },
+                        ]}
+                        sizes="60px"
                       />
                       <div className="flex flex-col">
                         <div className="text-key-500 text-sm leading-snug">
@@ -347,7 +354,14 @@ export function Serialize({ nodes }: Props): JSX.Element {
                         />
                         <Image
                           media={item.image}
-                          className="aspect-1/1 w-36 rounded-full object-cover"
+                          className="aspect-1/1 w-[135px] rounded-full object-cover"
+                          srcSet={[
+                            {
+                              options: { width: 135, height: 135, fit: "crop" },
+                              size: "135w",
+                            },
+                          ]}
+                          sizes="135px"
                         />
                         <div className="font-altsans">
                           <div className="font-bold leading-snug">

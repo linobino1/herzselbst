@@ -35,6 +35,9 @@ export async function loader({ context: { payload } }: LoaderFunctionArgs) {
   return json({
     ENV: {
       PAYLOAD_PUBLIC_SERVER_URL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
+      CDN_CGI_IMAGE_URL: process.env.CDN_CGI_IMAGE_URL,
+      USE_CLOUDFLARE_IMAGE_TRANSFORMATIONS:
+        process.env.USE_CLOUDFLARE_IMAGE_TRANSFORMATIONS,
     },
     site,
     navigations,

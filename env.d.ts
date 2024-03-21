@@ -47,12 +47,20 @@ declare module "@remix-run/express" {
 }
 
 declare global {
-  interface ServerEnvironment {
-    NODE_ENV: string;
-    MEDIA_URL: string;
-  }
   interface BrowserEnvironment {
     PAYLOAD_PUBLIC_SERVER_URL: string;
+    USE_CLOUDFLARE_IMAGE_TRANSFORMATIONS: string;
+    CDN_CGI_IMAGE_URL: string;
+  }
+  interface ServerEnvironment extends BrowserEnvironment {
+    NODE_ENV: string;
+    S3_ENABLED: string;
+    S3_ENDPOINT: string;
+    S3_BUCKET: string;
+    S3_REGION: string;
+    S3_ACCESS_KEY: string;
+    S3_SECRET_KEY: string;
+    MEDIA_URL: string;
   }
   interface Window {
     ENV: BrowserEnvironment;
