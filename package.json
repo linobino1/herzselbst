@@ -26,7 +26,6 @@
     "@remix-run/react": "^2.7.0",
     "@unocss/reset": "^0.58.5",
     "aws-crt": "^1.21.1",
-    "axios": "^1.6.7",
     "compression": "^1.7.4",
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.4",

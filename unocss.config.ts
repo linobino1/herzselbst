@@ -6,7 +6,6 @@ import {
   transformerDirectives,
 } from "unocss";
 import presetWebFonts from "@unocss/preset-web-fonts";
-import axios from "axios";
 
 export default defineConfig({
   presets: [
@@ -14,7 +13,6 @@ export default defineConfig({
     presetWind() /* tailwind compatible */,
     presetIcons(),
     presetWebFonts({
-      customFetch: (url: string) => axios.get(url).then((it) => it.data),
       provider: "google",
       fonts: {
         sans: {

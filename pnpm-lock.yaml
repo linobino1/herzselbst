@@ -41,9 +41,6 @@ dependencies:
   aws-crt:
     specifier: ^1.21.1
     version: 1.21.1
-  axios:
-    specifier: ^1.6.7
-    version: 1.6.7
   compression:
     specifier: ^1.7.4
     version: 1.7.4
