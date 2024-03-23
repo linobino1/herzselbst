@@ -37,7 +37,10 @@ export const CookieConsentProvider: React.FC<{
       value={{
         consent: state,
         setConsent: (consent) => {
-          setCookie("cookie-consent", consent, { path: "/" });
+          setCookie("cookie-consent", consent, {
+            path: "/",
+            maxAge: 60 * 60 * 24 * 365, // 1 year
+          });
           setState(consent);
         },
       }}
