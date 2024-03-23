@@ -92,7 +92,7 @@ const NavigationItem: React.FC<ItemProps> = ({
         }
         prefetch="intent"
       >
-        {(item.doc?.value as any).title}
+        {item.label || (item.doc?.value as any).title}
       </NavLink>
     );
   }

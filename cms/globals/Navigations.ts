@@ -73,15 +73,6 @@ const createNavigationField = (
           : null,
       ].filter(Boolean),
     },
-    {
-      name: "label",
-      label: "Bezeichnung",
-      type: "text",
-      admin: {
-        condition: (data: any, siblingData: any) =>
-          siblingData.type === "external",
-      },
-    },
     // internal link
     {
       name: "doc",
@@ -112,6 +103,16 @@ const createNavigationField = (
       admin: {
         condition: (data: any, siblingData: any) =>
           siblingData.type === "external",
+      },
+    },
+    {
+      name: "label",
+      label: "Bezeichnung",
+      type: "text",
+      admin: {
+        condition: (data: any, siblingData: any) =>
+          siblingData.type !== "subnavigation",
+        description: "Default: Titel der verlinkten Seite",
       },
     },
     {
