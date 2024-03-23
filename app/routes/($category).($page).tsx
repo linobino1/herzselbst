@@ -142,6 +142,10 @@ export default function Page() {
                     options: { width: 142, height: 142, fit: "crop" },
                     size: "142w",
                   },
+                  {
+                    options: { width: 284, height: 284, fit: "crop" },
+                    size: "284w",
+                  },
                 ]}
                 sizes="142px"
               />

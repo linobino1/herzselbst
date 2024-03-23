@@ -314,6 +314,10 @@ export function Serialize({ nodes }: Props): JSX.Element {
                             options: { width: 60, height: 60, fit: "crop" },
                             size: "60w",
                           },
+                          {
+                            options: { width: 120, height: 120, fit: "crop" },
+                            size: "120w",
+                          },
                         ]}
                         sizes="60px"
                       />
@@ -359,6 +363,10 @@ export function Serialize({ nodes }: Props): JSX.Element {
                             {
                               options: { width: 135, height: 135, fit: "crop" },
                               size: "135w",
+                            },
+                            {
+                              options: { width: 270, height: 270, fit: "crop" },
+                              size: "270w",
                             },
                           ]}
                           sizes="135px"
