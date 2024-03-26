@@ -1,4 +1,4 @@
-import { redirect, type LoaderFunctionArgs } from "@remix-run/node";
+import { redirect, type LoaderFunctionArgs, json } from "@remix-run/node";
 import type { MetaFunction } from "@remix-run/react";
 import {
   useLoaderData,
@@ -83,10 +83,7 @@ export const loader = async ({
       ).slug as string;
       throw redirect(`/${category}/${pageSlug}`);
     } else {
-      throw new Response(null, {
-        status: 404,
-        statusText: "Not Found",
-      });
+      throw json("Not Found", { status: 404 });
     }
   }
 
@@ -100,13 +97,10 @@ export const loader = async ({
   });
 
   if (!pageDocs.totalDocs) {
-    throw new Response(null, {
-      status: 404,
-      statusText: "Not Found",
-    });
+    throw json("Not Found", { status: 404 });
   }
 
-  return { page: pageDocs.docs[0] };
+  return json({ page: pageDocs.docs[0] });
 };
 
 export default function Page() {
