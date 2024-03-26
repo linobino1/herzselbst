@@ -27,6 +27,7 @@ const Pages: CollectionConfig = {
             category = await payload.findByID({
               collection: "categories",
               id: category,
+              depth: 0,
             });
           }
           s = `/${category.slug}${s}`;
