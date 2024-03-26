@@ -24,10 +24,10 @@ import { twMerge } from "tailwind-merge";
 
 export async function loader({ context: { payload } }: LoaderFunctionArgs) {
   const [site, navigations] = await Promise.all([
-    await payload.findGlobal({
+    payload.findGlobal({
       slug: "site",
     }),
-    await payload.findGlobal({
+    payload.findGlobal({
       slug: "navigations",
       depth: 1,
     }),
