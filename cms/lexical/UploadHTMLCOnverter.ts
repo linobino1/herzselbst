@@ -10,6 +10,7 @@ export const UploadHTMLConverter: HTMLConverter<SerializedUploadNode> = {
     const uploadDocument = await payload.findByID({
       id: node.value.id,
       collection: node.relationTo as "media",
+      depth: 0,
     });
     const url = (payload?.config?.serverURL || "") + uploadDocument?.url;
 
