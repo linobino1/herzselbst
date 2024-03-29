@@ -4,8 +4,8 @@ import { publicReadOnly } from "../access/publicReadOnly";
 const Categories: CollectionConfig = {
   slug: "categories",
   labels: {
-    singular: "Kategorie",
-    plural: "Kategorien",
+    singular: "Seitenkategorie",
+    plural: "Seitenkategorien",
   },
   admin: {
     group: "Inhalte",
