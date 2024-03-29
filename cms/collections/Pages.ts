@@ -11,11 +11,12 @@ const Pages: CollectionConfig = {
   admin: {
     group: "Inhalte",
     useAsTitle: "title",
-    defaultColumns: ["title", "slug", "category"],
+    defaultColumns: ["title", "category"],
     pagination: {
       defaultLimit: 50,
     },
   },
+  defaultSort: "-updatedAt",
   access: publicReadOnly,
   custom: {
     addUrlField: {
@@ -73,17 +74,6 @@ const Pages: CollectionConfig = {
       required: false,
     },
     {
-      name: "sidebar",
-      type: "group",
-      fields: [
-        {
-          name: "content",
-          label: "Inhalt",
-          type: "richText",
-        },
-      ],
-    },
-    {
       name: "h1",
       label: "Überschrift",
       type: "text",
@@ -96,6 +86,17 @@ const Pages: CollectionConfig = {
     lexicalHTML("content", {
       name: "content_html",
     }),
+    {
+      name: "sidebar",
+      type: "group",
+      fields: [
+        {
+          name: "content",
+          label: "Inhalt",
+          type: "richText",
+        },
+      ],
+    },
   ],
 };
 
