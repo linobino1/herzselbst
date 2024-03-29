@@ -54,42 +54,52 @@ const Pages: CollectionConfig = {
       required: true,
     },
     {
-      name: "images",
-      label: "Runde Abbildungen",
-      labels: {
-        singular: "Bild",
-        plural: "Bilder",
-      },
-      type: "array",
-      fields: [
+      type: "tabs",
+      tabs: [
         {
-          name: "image",
-          label: "Bild",
-          type: "upload",
-          relationTo: "media",
-          required: true,
-        },
-      ],
-      required: false,
-    },
-    {
-      name: "h1",
-      label: "Überschrift",
-      type: "text",
-    },
-    {
-      name: "content",
-      label: "Inhalt",
-      type: "richText",
-    },
-    {
-      name: "sidebar",
-      type: "group",
-      fields: [
-        {
-          name: "content",
           label: "Inhalt",
-          type: "richText",
+          fields: [
+            {
+              name: "h1",
+              label: "Überschrift",
+              type: "text",
+            },
+            {
+              name: "content",
+              label: "Inhalt",
+              type: "richText",
+            },
+          ],
+        },
+        {
+          label: "Seitenleiste",
+          name: "sidebar",
+          fields: [
+            {
+              name: "images",
+              label: "Bilder",
+              labels: {
+                singular: "Bild",
+                plural: "Bilder",
+              },
+              type: "array",
+              fields: [
+                {
+                  name: "image",
+                  label: "Bild",
+                  type: "upload",
+                  relationTo: "media",
+                  required: true,
+                },
+              ],
+              required: false,
+            },
+            {
+              name: "content",
+              label: "Inhalt",
+              type: "richText",
+            },
+          ],
         },
       ],
     },

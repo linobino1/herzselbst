@@ -111,10 +111,10 @@ export default function Page() {
       <h1 className="mb-4 lg:mb-12">{page?.h1}</h1>
       <div className="flex gap-16">
         <RichText content={page?.content} className="w-full" />
-        {page?.images?.length ||
-        (page?.sidebar?.content && !isEmpty(page?.sidebar?.content)) ? (
+        {page?.sidebar.images?.length ||
+        (page?.sidebar.content && !isEmpty(page?.sidebar?.content)) ? (
           <div className="hidden shrink-0 flex-col items-center gap-16 px-2 pt-8 lg:flex">
-            {(page.images || []).map((image) => (
+            {(page.sidebar.images || []).map((image) => (
               <Image
                 media={image.image as Media}
                 key={image.id}
