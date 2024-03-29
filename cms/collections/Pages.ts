@@ -1,6 +1,5 @@
 import type { CollectionConfig, FieldHookArgs } from "payload/types";
 import { publicReadOnly } from "../access/publicReadOnly";
-import { lexicalHTML } from "@payloadcms/richtext-lexical";
 
 const Pages: CollectionConfig = {
   slug: "pages",
@@ -83,9 +82,6 @@ const Pages: CollectionConfig = {
       label: "Inhalt",
       type: "richText",
     },
-    lexicalHTML("content", {
-      name: "content_html",
-    }),
     {
       name: "sidebar",
       type: "group",
