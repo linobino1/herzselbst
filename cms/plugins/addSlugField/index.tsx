@@ -28,7 +28,7 @@ export interface slugGenerator {
 const defaultGenerator: slugGenerator = async ({ data, originalDoc, from }) => {
   if (!from)
     throw new Error(
-      "from is required in addSlugField config if no generator is given"
+      "from is required in addSlugField config if no generator is given",
     );
   const res = (originalDoc && originalDoc[from]) || (data && data[from]);
   return typeof res === "string" ? res : undefined;
@@ -65,7 +65,7 @@ const field: Field = {
   index: true,
   admin: {
     position: "sidebar",
-    description: "Will be automatically generated if left blank.",
+    description: "Wird automatisch ausgefüllt",
   },
 };
 /**
@@ -101,7 +101,7 @@ export const addSlugField: Plugin = (incomingConfig: Config): Config => {
               },
               fields: [...collection.fields, field],
             }
-          : collection
+          : collection,
       ) || []),
     ],
   };
