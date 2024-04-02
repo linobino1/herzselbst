@@ -87,7 +87,7 @@ export default function App() {
         <body>
           {pathname === "/" && <Intro />}
           <div className="mx-auto w-full max-w-[1320px] lg:flex">
-            <aside className="border-b-1 border-key-500 top-0 flex shrink-0 flex-col px-4 pb-4 pt-4 lg:sticky lg:h-[100vh] lg:border-none lg:pb-0 lg:pl-8 lg:pr-12 lg:pt-12">
+            <aside className="border-b-1 border-key-500 top-0 flex shrink-0 flex-col px-4 pb-4 pt-4 md:overflow-auto md:overscroll-contain lg:sticky lg:h-[100vh] lg:border-none lg:pb-0 lg:pl-8 lg:pr-12 xl:pt-12">
               <NavLink
                 to="/"
                 prefetch="intent"
@@ -105,17 +105,17 @@ export default function App() {
               </div>
               <div
                 className={twMerge(
-                  "z-49 fixed right-0 top-0 h-[100vh] h-full translate-x-0 overflow-y-auto bg-white px-8 pt-12 shadow-lg transition-transform max-sm:w-full lg:contents lg:text-start",
+                  "z-49 fixed right-0 top-0 h-[100vh] h-full translate-x-0 bg-white px-8 pt-12 shadow-lg transition-transform max-lg:overflow-y-auto max-sm:w-full lg:contents lg:text-start",
                   !isMenuOpen && "translate-x-full shadow-none",
                 )}
               >
-                <div className="mt-12 w-full flex-1 overflow-y-auto sm:pl-6 lg:pl-12">
+                <div className="mt-8 w-full flex-1 sm:pl-6 lg:pl-12 xl:mt-12">
                   <Navigation
                     items={navigations.main}
-                    className="flex-col gap-y-3 text-end text-lg text-gray-500 lg:text-start"
+                    className="flex-col gap-y-1 text-end text-gray-500 lg:text-start xl:gap-y-2"
                   />
                 </div>
-                <div className="text-key-500 font-altsans lg:text-md w-full space-y-2 py-8 text-lg sm:pl-6 lg:pl-12">
+                <div className="text-key-500 font-altsans lg:text-md w-full space-y-2 py-4 text-lg sm:pl-6 lg:pl-12 xl:py-8">
                   <div className="flex items-center justify-end gap-2 lg:justify-start">
                     <div className="i-ion:ios-call text-xl" />
                     <a href={`tel:${site.contact?.phone}`}>
