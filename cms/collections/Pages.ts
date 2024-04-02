@@ -15,7 +15,9 @@ const Pages: CollectionConfig = {
       defaultLimit: 50,
     },
   },
-  defaultSort: "-updatedAt",
+  // uncomment the next line as soon as this bug is fixed:
+  // https://github.com/payloadcms/payload/issues/4815
+  // defaultSort: "-updatedAt",
   access: publicReadOnly,
   custom: {
     addUrlField: {
