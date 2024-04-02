@@ -4,7 +4,6 @@ import type { Media, Site } from "payload/generated-types";
 import type { loader as rootLoader } from "~/root";
 import { useRouteLoaderData } from "@remix-run/react";
 import { twMerge } from "tailwind-merge";
-import e from "express";
 
 const Intro = () => {
   const { site } = useRouteLoaderData<typeof rootLoader>("root") as {
