@@ -21,6 +21,7 @@ import type { Publication } from "../../cms/blocks/Publications";
 import Newsletter from "~/components/Newsletter";
 import Gallery from "~/components/Gallery";
 import GoogleMapsEmbed from "~/components/GoogleMapsEmbed";
+import slugify from "slugify";
 
 interface Props {
   nodes: SerializedLexicalNode[];
@@ -129,10 +130,18 @@ export function Serialize({ nodes }: Props): JSX.Element {
               "h1" | "h2" | "h3" | "h4" | "h5"
             >;
             const Tag = node?.tag as Heading;
+
+            // Generate anchor for headings
+            const anchor = node.children?.length
+              ? slugify(node.children[0]?.text || `${index}`, { lower: true })
+              : `${index}`;
+
             return (
-              <Tag key={index} className={className}>
-                {serializedChildren}
-              </Tag>
+              <a id={anchor} href={`#${anchor}`} className="" key={index}>
+                <Tag key={index} className={className}>
+                  {serializedChildren}
+                </Tag>
+              </a>
             );
           }
           case "list": {
@@ -183,6 +192,7 @@ export function Serialize({ nodes }: Props): JSX.Element {
               linkType?: "custom" | "internal";
               newTab?: boolean;
               url?: string;
+              appendix?: string;
             } = node.fields;
 
             if (fields.linkType === "custom") {
@@ -190,7 +200,7 @@ export function Serialize({ nodes }: Props): JSX.Element {
               return (
                 <a
                   key={index}
-                  href={fields.url}
+                  href={fields.url + (fields.appendix || "")}
                   target={fields.newTab ? 'target="_blank"' : undefined}
                   rel={rel}
                   className="text-key-500 underline"
@@ -202,7 +212,7 @@ export function Serialize({ nodes }: Props): JSX.Element {
               return (
                 <Link
                   key={index}
-                  to={fields.doc.value.url}
+                  to={fields.doc.value.url + (fields.appendix || "")}
                   target={fields.newTab ? "_blank" : undefined}
                   className="text-key-500 underline"
                   prefetch="intent"
@@ -281,7 +291,10 @@ export function Serialize({ nodes }: Props): JSX.Element {
                 return (
                   <Link
                     key={index}
-                    to={node.fields.link.url || node.fields.link.doc.value.url}
+                    to={
+                      (node.fields.link.url || node.fields.link.doc.value.url) +
+                      (node.fields.link.appendix || "")
+                    }
                     prefetch={node.fields.link.doc ? "intent" : undefined}
                     rel={
                       node.fields.link.url

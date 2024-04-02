@@ -1,4 +1,5 @@
 import type { Field } from "payload/types";
+import { linkAppendix } from "./linkAppendix";
 
 export const link = ({
   extraFields,
@@ -79,6 +80,7 @@ export const link = ({
           siblingData.type !== "subnavigation",
       },
     },
+    linkAppendix,
     ...(extraFields || []),
   ].filter(Boolean),
 });

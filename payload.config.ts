@@ -30,6 +30,7 @@ import CTAColumns from "./cms/blocks/CTAColumns";
 import Newsletter from "./cms/blocks/Newsletter";
 import Gallery from "./cms/blocks/Gallery";
 import GoogleMaps from "./cms/blocks/GoogleMaps";
+import { linkAppendix } from "./cms/fields/linkAppendix";
 
 export default buildConfig({
   rateLimit: {
@@ -57,6 +58,7 @@ export default buildConfig({
       ...defaultFeatures.filter((feature) => feature.key !== "orderedList"),
       LinkFeature({
         enabledCollections: ["pages", "media"],
+        fields: [linkAppendix],
       }),
       BlocksFeature({
         blocks: [
