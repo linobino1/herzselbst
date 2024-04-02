@@ -14,9 +14,7 @@ export const Media: CollectionConfig = {
     },
   },
   access: publicReadOnly,
-  upload: {
-    staticDir: process.env.MEDIA_DIR || undefined,
-  },
+  upload: true,
   fields: [
     {
       name: "alt",
