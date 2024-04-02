@@ -24,7 +24,7 @@ const Intro = () => {
   return (
     <div
       className={twMerge(
-        "fixed left-0 top-0 z-50 flex h-full w-full flex-col items-center justify-center bg-white",
+        "z-25 fixed left-0 top-0 flex h-full w-full flex-col items-center justify-center bg-white",
         hide &&
           "pointer-events-none opacity-0 transition-opacity duration-200 ease-in-out",
       )}
