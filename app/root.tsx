@@ -105,7 +105,19 @@ export default function App() {
                 prefetch="intent"
                 className="self-center pb-4 lg:pb-0"
               >
-                {site.logo && <Image media={site.logo as Media} />}
+                {site.logo && (
+                  <Image
+                    media={site.logo as Media}
+                    className="max-w-[300px]"
+                    sizes="300px"
+                    srcSet={[
+                      {
+                        options: { width: 300 },
+                        size: "300w",
+                      },
+                    ]}
+                  />
+                )}
               </NavLink>
               <div className="fixed right-0 top-0 z-50 bg-white p-4 lg:hidden">
                 <Hamburger
