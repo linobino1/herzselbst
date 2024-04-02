@@ -239,10 +239,12 @@ export function Serialize({ nodes }: Props): JSX.Element {
                     {node.fields.items.map(
                       (item: Publication, subIndex: number) => (
                         <div key={subIndex} className="flex gap-6">
-                          <Image
-                            media={item.image}
-                            className="w-24 self-start object-contain"
-                          />
+                          {item.image && (
+                            <Image
+                              media={item.image}
+                              className="w-24 self-start object-contain"
+                            />
+                          )}
                           <div>
                             <div className="font-bold leading-snug">
                               {item.title}
