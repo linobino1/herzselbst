@@ -115,6 +115,10 @@ export default function App() {
                         options: { width: 300 },
                         size: "300w",
                       },
+                      {
+                        options: { width: 600 },
+                        size: "600w",
+                      },
                     ]}
                   />
                 )}
