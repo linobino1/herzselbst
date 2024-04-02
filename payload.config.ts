@@ -53,7 +53,8 @@ export default buildConfig({
   },
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [
-      ...defaultFeatures,
+      // we remove the ordered list feature because it makes entering dates in the editor difficult, as it automatically creates an ordered list if you type sth. like "22. [...]"
+      ...defaultFeatures.filter((feature) => feature.key !== "orderedList"),
       LinkFeature({
         enabledCollections: ["pages", "media"],
       }),
