@@ -139,7 +139,8 @@ export default function App() {
                 <Navigation
                   items={navigations.footer}
                   className="flex flex-wrap justify-center gap-x-4 gap-y-0 pb-4 lg:pb-0"
-                  activeClassName="underline"
+                  itemClassName="hover:underline hover:text-white"
+                  activeItemClassName="underline"
                 />
                 <p className="text-center leading-snug">
                   Copyright ©{new Date().getFullYear()} Praxis und Schule für

@@ -5,18 +5,21 @@ import { twMerge } from "tailwind-merge";
 
 type ItemProps = {
   item: NonNullable<Navigations["main"]>[0];
-  activeClassName?: string;
+  itemClassName?: string;
+  activeItemClassName?: string;
 };
 
 type Props = {
   items: Navigations["main" | "footer"];
   className?: string;
-  activeClassName?: string;
+  itemClassName?: string;
+  activeItemClassName?: string;
 };
 
 const NavigationItem: React.FC<ItemProps> = ({
   item,
-  activeClassName = "text-key-500",
+  itemClassName,
+  activeItemClassName = "text-key-500",
 }) => {
   const { pathname } = useLocation();
   const [isToggled, setIsToggled] = useState<Record<string, boolean>>({});
@@ -49,7 +52,8 @@ const NavigationItem: React.FC<ItemProps> = ({
             to={category.url || ""}
             className={twMerge(
               "hover:text-key-400 mb-2",
-              isActive && activeClassName,
+              itemClassName,
+              isActive && activeItemClassName,
             )}
             prefetch="intent"
           >
@@ -67,8 +71,10 @@ const NavigationItem: React.FC<ItemProps> = ({
     );
   }
 
-  const classes =
-    "hover:text-key-400 mb-2 transition-colors duration-200 ease-in-out";
+  const classes = twMerge(
+    "hover:text-key-400 mb-2 transition-colors duration-200 ease-in-out",
+    itemClassName,
+  );
 
   if (item.type === "external") {
     return (
@@ -88,7 +94,7 @@ const NavigationItem: React.FC<ItemProps> = ({
       <NavLink
         to={(item.doc?.value as any).url}
         className={({ isActive, isPending }) =>
-          twMerge(classes, (isActive || isPending) && activeClassName)
+          twMerge(classes, (isActive || isPending) && activeItemClassName)
         }
         prefetch="intent"
       >
@@ -102,7 +108,8 @@ const NavigationItem: React.FC<ItemProps> = ({
 
 export const Navigation: React.FC<Props> = ({
   items,
-  activeClassName,
+  itemClassName,
+  activeItemClassName,
   className,
 }) => {
   // each item renders as either an internal link, an external link with an icon or text, or another navigation
@@ -112,7 +119,8 @@ export const Navigation: React.FC<Props> = ({
         <NavigationItem
           item={item}
           key={item.id}
-          activeClassName={activeClassName}
+          itemClassName={itemClassName}
+          activeItemClassName={activeItemClassName}
         />
       ))}
     </nav>
