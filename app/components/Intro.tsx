@@ -21,6 +21,14 @@ const Intro = () => {
     }, 5000);
   }, []);
 
+  useEffect(() => {
+    if (hide) {
+      document.body.style.overflow = "auto";
+    } else {
+      document.body.style.overflow = "hidden";
+    }
+  }, [hide]);
+
   return (
     <div
       className={twMerge(
