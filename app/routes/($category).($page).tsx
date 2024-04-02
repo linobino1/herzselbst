@@ -25,14 +25,26 @@ export function ErrorBoundary() {
   }
 }
 
+/**
+ * TODO: this implementation is very rudementary and should be improved. We are using the same description for all pages.
+ */
 export const meta: MetaFunction<typeof loader> = ({ data, matches }) => {
   const rootLoaderData = matches.find((match) => match.id === "root")
     ?.data as any;
+  const title = generateTitle(rootLoaderData?.site, data?.page);
   return [
     {
-      title: generateTitle(rootLoaderData?.site, data?.page),
+      title,
     },
-    // TODO meta description
+    { name: "og:title", content: title },
+    {
+      name: "description",
+      content: rootLoaderData?.site.meta?.description,
+    },
+    {
+      name: "og:description",
+      content: rootLoaderData?.site.meta?.description,
+    },
   ];
 };
 
