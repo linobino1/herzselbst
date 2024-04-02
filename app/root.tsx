@@ -21,6 +21,7 @@ import Cookies, { CookieConsentProvider } from "./providers/Cookies";
 import { Cross as Hamburger } from "hamburger-react";
 import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
+import getOptimizedImageUrl from "./util/getOptimizedImageUrl";
 
 export async function loader({ context: { payload } }: LoaderFunctionArgs) {
   const [site, navigations] = await Promise.all([
@@ -72,6 +73,17 @@ export default function App() {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {site.meta?.image && (
+          <meta
+            property="og:image"
+            content={getOptimizedImageUrl(
+              (site.meta.image as Media).url as string,
+              {
+                width: 1200,
+              },
+            )}
+          />
+        )}
         {(site.meta?.additionalMetaTags || []).map((tag) => (
           <meta key={tag.key} name={tag.key} content={tag.value} />
         ))}
