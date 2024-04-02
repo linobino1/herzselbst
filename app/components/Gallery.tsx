@@ -20,7 +20,25 @@ export const Gallery: React.FC<Type> = ({ images }) => {
       <Carousel showArrows={true} showThumbs={false} showStatus={false}>
         {images.map((item) => (
           <figure key={item.id} className="relative">
-            <Image className="" media={item.image as Media} />
+            <Image
+              className=""
+              media={item.image as Media}
+              sizes="(max-width: 1024) 100vw, 824px"
+              srcSet={[
+                {
+                  options: { width: 600 },
+                  size: "600w",
+                },
+                {
+                  options: { width: 1200 },
+                  size: "1200w",
+                },
+                {
+                  options: { width: 1800 },
+                  size: "1800w",
+                },
+              ]}
+            />
             <figcaption className="z-1 absolute bottom-1 left-1 bg-black bg-opacity-20 px-2 text-sm text-gray-100">
               {item.caption}
             </figcaption>
