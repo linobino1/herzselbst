@@ -137,11 +137,19 @@ export function Serialize({ nodes }: Props): JSX.Element {
               : `${index}`;
 
             return (
-              <a id={anchor} href={`#${anchor}`} className="" key={index}>
-                <Tag key={index} className={className}>
+              <Tag key={index} className={twMerge(className, "group")}>
+                <div className="vertical relative inline">
+                  <a
+                    id={anchor}
+                    href={`#${anchor}`}
+                    className="hover-text-gray-400 absolute right-[100%] hidden pr-2 pt-0.5 text-gray-300 group-hover:block"
+                    key={index}
+                  >
+                    <div className="i-ion:ios-link text-xl" />
+                  </a>
                   {serializedChildren}
-                </Tag>
-              </a>
+                </div>
+              </Tag>
             );
           }
           case "list": {
