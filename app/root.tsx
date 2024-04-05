@@ -54,9 +54,12 @@ export async function loader({
       navigations,
     },
     {
-      // set intro cookie on every request
+      // set intro cookie on every request with a max age of 24 hours
       headers: {
-        "Set-Cookie": await intro.serialize(true),
+        "Set-Cookie": await intro.serialize(true, {
+          path: "/",
+          maxAge: 60 * 60 * 24,
+        }),
       },
     },
   );
