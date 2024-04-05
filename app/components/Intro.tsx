@@ -5,38 +5,35 @@ import type { loader as rootLoader } from "~/root";
 import { useRouteLoaderData } from "@remix-run/react";
 import { twMerge } from "tailwind-merge";
 
-const Intro = () => {
+export interface IntroProps {
+  initiallyHidden?: boolean;
+}
+
+const Intro: React.FC<IntroProps> = ({ initiallyHidden }) => {
   const { site } = useRouteLoaderData<typeof rootLoader>("root") as {
     site: Site;
   };
-  const [hide, setHide] = useState(true);
+  const [hidden, setHidden] = useState(!!initiallyHidden);
 
   useEffect(() => {
-    setHide(sessionStorage.getItem("hide_intro") === "true");
-    sessionStorage.setItem("hide_intro", "true");
-
     // hide intro after x seconds
     setTimeout(() => {
-      setHide(true);
+      setHidden(true);
     }, 5000);
   }, []);
 
   useEffect(() => {
-    if (hide) {
-      document.body.style.overflow = "auto";
-    } else {
-      document.body.style.overflow = "hidden";
-    }
-  }, [hide]);
+    document.body.style.overflow = hidden ? "auto" : "hidden";
+  }, [hidden]);
 
   return (
     <div
       className={twMerge(
         "z-25 fixed left-0 top-0 flex h-full w-full flex-col items-center justify-center bg-white",
-        hide &&
+        hidden &&
           "pointer-events-none opacity-0 transition-opacity duration-200 ease-in-out",
       )}
-      onClick={() => setHide(true)}
+      onClick={() => setHidden(true)}
     >
       {site.logo && (
         <Image

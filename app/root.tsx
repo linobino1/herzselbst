@@ -22,8 +22,12 @@ import { Cross as Hamburger } from "hamburger-react";
 import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import getOptimizedImageUrl from "./util/getOptimizedImageUrl";
+import { intro } from "~/cookies";
 
-export async function loader({ context: { payload } }: LoaderFunctionArgs) {
+export async function loader({
+  request,
+  context: { payload },
+}: LoaderFunctionArgs) {
   const [site, navigations] = await Promise.all([
     payload.findGlobal({
       slug: "site",
@@ -33,16 +37,29 @@ export async function loader({ context: { payload } }: LoaderFunctionArgs) {
       depth: 1,
     }),
   ]);
-  return json({
-    ENV: {
-      PAYLOAD_PUBLIC_SERVER_URL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
-      CDN_CGI_IMAGE_URL: process.env.CDN_CGI_IMAGE_URL,
-      USE_CLOUDFLARE_IMAGE_TRANSFORMATIONS:
-        process.env.USE_CLOUDFLARE_IMAGE_TRANSFORMATIONS,
+
+  const cookieHeader = request.headers.get("Cookie");
+  // if there is a cookie called "intro" with a truthy value, we assume the user has seen the intro
+  const sawIntro = Boolean(await intro.parse(cookieHeader));
+  return json(
+    {
+      ENV: {
+        PAYLOAD_PUBLIC_SERVER_URL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
+        CDN_CGI_IMAGE_URL: process.env.CDN_CGI_IMAGE_URL,
+        USE_CLOUDFLARE_IMAGE_TRANSFORMATIONS:
+          process.env.USE_CLOUDFLARE_IMAGE_TRANSFORMATIONS,
+      },
+      sawIntro,
+      site,
+      navigations,
     },
-    site,
-    navigations,
-  });
+    {
+      // set intro cookie on every request
+      headers: {
+        "Set-Cookie": await intro.serialize(true),
+      },
+    },
+  );
 }
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => [
@@ -50,7 +67,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => [
 ];
 
 export default function App() {
-  const { ENV, site, navigations } = useLoaderData<typeof loader>();
+  const { ENV, site, navigations, sawIntro } = useLoaderData<typeof loader>();
   const { pathname } = useLocation();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -97,7 +114,7 @@ export default function App() {
       </head>
       <CookieConsentProvider>
         <body>
-          {pathname === "/" && <Intro />}
+          {pathname === "/" && <Intro initiallyHidden={sawIntro} />}
           <div className="mx-auto w-full max-w-[1320px] lg:flex">
             <aside className="border-b-1 border-key-500 top-0 flex shrink-0 flex-col px-4 pb-4 pt-4 md:overflow-auto md:overscroll-contain lg:sticky lg:h-[100vh] lg:border-none lg:pb-0 lg:pl-8 lg:pr-12 xl:pt-12">
               <NavLink
