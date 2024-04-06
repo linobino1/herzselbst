@@ -145,7 +145,7 @@ export function Serialize({ nodes }: Props): JSX.Element {
                     className="hover-text-gray-400 absolute right-[100%] hidden pr-2 pt-0.5 text-gray-300 group-hover:block"
                     key={index}
                   >
-                    <div className="i-ion:ios-link text-xl" />
+                    <div className="icon-[ion--ios-link] text-xl"></div>
                   </a>
                   {serializedChildren}
                 </div>
@@ -286,7 +286,7 @@ export function Serialize({ nodes }: Props): JSX.Element {
               case "foldable":
                 return (
                   <details key={index}>
-                    <summary className="text-key-500 font-altsans mb-4 cursor-pointer text-xl underline">
+                    <summary className="mb-4 cursor-pointer font-altsans text-xl text-key-500 underline">
                       {node.fields.title}
                     </summary>
                     <div className="pb-4">
@@ -310,7 +310,7 @@ export function Serialize({ nodes }: Props): JSX.Element {
                         : undefined
                     }
                     target={node.fields.link.newTab ? "_blank" : undefined}
-                    className="bg-key-500 font-altsans hover:bg-key-600 my-4 flex w-fit max-w-full cursor-pointer rounded-sm px-4 py-2 text-center text-white underline transition-colors"
+                    className="my-4 flex w-fit max-w-full cursor-pointer rounded-sm bg-key-500 px-4 py-2 text-center font-altsans text-white underline transition-colors hover:bg-key-600"
                   >
                     {node.fields.label}
                   </Link>
@@ -345,7 +345,7 @@ export function Serialize({ nodes }: Props): JSX.Element {
                         sizes="60px"
                       />
                       <div className="flex flex-col">
-                        <div className="text-key-500 text-sm leading-snug">
+                        <div className="text-sm leading-snug text-key-500">
                           {node.fields.author.name}
                         </div>
                         {node.fields.author.about && (
@@ -375,7 +375,7 @@ export function Serialize({ nodes }: Props): JSX.Element {
                       <div key={subIndex} className="flex flex-col gap-4">
                         <div
                           className={twMerge(
-                            "border-key-500 w-full md:hidden",
+                            "w-full border-key-500 md:hidden",
                             subIndex > 0 && "border-t-1 mb-2 pb-2",
                           )}
                         />

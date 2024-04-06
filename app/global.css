@@ -1,4 +1,6 @@
-@unocss all;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 html {
   font-size: 15px;
@@ -6,7 +8,7 @@ html {
 }
 
 h1 {
-  @apply text-key-500 text-2xl font-medium leading-snug lg:text-4xl lg:font-normal;
+  @apply text-2xl font-medium leading-snug text-key-500 lg:text-4xl lg:font-normal;
 }
 
 h2,
@@ -53,7 +55,7 @@ h6 {
   @apply max-w-lg;
 }
 .lexical button {
-  @apply bg-key-500 hover:bg-key-600 rounded-sm px-4 py-2 text-white;
+  @apply rounded-sm bg-key-500 px-4 py-2 text-white hover:bg-key-600;
 }
 .lexical .text-left {
   text-align: left;

@@ -52,7 +52,7 @@ const Intro: React.FC<IntroProps> = ({ initiallyHidden }) => {
           ]}
         />
       )}
-      <button className="bg-key-500 hover:bg-key-600 focus:ring-key-500 mt-12 rounded-lg px-4 py-2 text-white transition-colors duration-200 ease-in-out">
+      <button className="mt-12 rounded-lg bg-key-500 px-4 py-2 text-white transition-colors duration-200 ease-in-out hover:bg-key-600 focus:ring-key-500">
         Zur Haupseite
       </button>
     </div>

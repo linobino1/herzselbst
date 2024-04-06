@@ -74,7 +74,7 @@ const Cookies = () => {
         </Link>
         .{" "}
       </p>
-      <div className="font-altsans mt-4 flex justify-end gap-4 text-white underline">
+      <div className="mt-4 flex justify-end gap-4 font-altsans text-white underline">
         <button
           onClick={onDecline}
           className="rounded-sm bg-red-500 px-4 py-2 hover:bg-red-600"
@@ -83,7 +83,7 @@ const Cookies = () => {
         </button>
         <button
           onClick={onAccept}
-          className="bg-key-500 hover:bg-key-600 rounded-sm px-4 py-2"
+          className="rounded-sm bg-key-500 px-4 py-2 hover:bg-key-600"
         >
           Akzeptieren
         </button>

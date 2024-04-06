@@ -43,15 +43,15 @@ const NavigationItem: React.FC<ItemProps> = ({
               className={twMerge(
                 "mt-0.5 text-xl text-gray-300 lg:hidden",
                 isActive || isToggled[item.id || ""]
-                  ? "i-ion:minus"
-                  : "i-ion:plus",
+                  ? "icon-[ion--minus]"
+                  : "icon-[ion--plus]",
               )}
             />
           </button>
           <NavLink
             to={category.url || ""}
             className={twMerge(
-              "hover:text-key-400 mb-2",
+              "mb-2 hover:text-key-400",
               itemClassName,
               isActive && activeItemClassName,
             )}

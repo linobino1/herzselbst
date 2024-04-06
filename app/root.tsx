@@ -1,4 +1,8 @@
-import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
+import type {
+  LinksFunction,
+  LoaderFunctionArgs,
+  MetaFunction,
+} from "@remix-run/node";
 import {
   Links,
   Meta,
@@ -10,9 +14,6 @@ import {
   useLoaderData,
   useLocation,
 } from "@remix-run/react";
-import "virtual:uno.css";
-import "@unocss/reset/tailwind.css";
-import "./global.css";
 import type { Media } from "payload/generated-types";
 import Image from "./components/Image";
 import Navigation from "./components/Navigation";
@@ -23,6 +24,25 @@ import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import getOptimizedImageUrl from "./util/getOptimizedImageUrl";
 import { intro } from "~/cookies";
+import stylesheet from "~/global.css?url";
+
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: stylesheet },
+  { rel: "preconnect", href: "https://fonts.googleapis.com" },
+  {
+    rel: "preconnect",
+    href: "https://fonts.gstatic.com",
+    crossOrigin: "anonymous",
+  },
+  {
+    rel: "stylesheet",
+    href: "https://fonts.googleapis.com/css2?family=League+Spartan:wght@400..700&display=swap",
+  },
+  {
+    rel: "stylesheet",
+    href: "https://fonts.googleapis.com/css2?family=Spartan:wght@400..700&display=swap",
+  },
+];
 
 export async function loader({
   request,
@@ -107,6 +127,10 @@ export default function App() {
         {(site.meta?.additionalMetaTags || []).map((tag) => (
           <meta key={tag.key} name={tag.key} content={tag.value} />
         ))}
+        {/* <style>
+          @import
+          url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400,500,700&display=swap')
+        </style> */}
         <Meta />
         <Links />
         <script
@@ -119,7 +143,7 @@ export default function App() {
         <body>
           {pathname === "/" && <Intro initiallyHidden={sawIntro} />}
           <div className="mx-auto w-full max-w-[1320px] lg:flex">
-            <aside className="border-b-1 border-key-500 top-0 flex shrink-0 flex-col px-4 pb-4 pt-4 md:overflow-auto md:overscroll-contain lg:sticky lg:h-[100vh] lg:border-none lg:pb-0 lg:pl-8 lg:pr-12 xl:pt-12">
+            <aside className="border-b-1 top-0 flex shrink-0 flex-col border-key-500 px-4 pb-4 pt-4 md:overflow-auto md:overscroll-contain lg:sticky lg:h-[100vh] lg:border-none lg:pb-0 lg:pl-8 lg:pr-12 xl:pt-12">
               <NavLink
                 to="/"
                 prefetch="intent"
@@ -163,15 +187,15 @@ export default function App() {
                     className="flex-col gap-y-1 text-end text-gray-500 lg:text-start xl:gap-y-2"
                   />
                 </div>
-                <div className="text-key-500 font-altsans lg:text-md w-full space-y-2 py-4 text-lg sm:pl-6 lg:pl-12 xl:py-8">
+                <div className="lg:text-md w-full space-y-2 py-4 font-altsans text-lg text-key-500 sm:pl-6 lg:pl-12 xl:py-8">
                   <div className="flex items-center justify-end gap-2 lg:justify-start">
-                    <div className="i-ion:ios-call text-xl" />
+                    <div className="icon-[ion--ios-call] text-xl"></div>
                     <a href={`tel:${site.contact?.phone}`}>
                       {site.contact?.phone}
                     </a>
                   </div>
                   <div className="flex items-center justify-end gap-2 lg:justify-start">
-                    <div className="i-ion:md-mail text-xl" />
+                    <div className="icon-[ion--md-mail] text-xl"></div>
                     <a href={`mailto:${site.contact?.email}`}>
                       {site.contact?.email}
                     </a>
@@ -179,11 +203,11 @@ export default function App() {
                 </div>
               </div>
             </aside>
-            <div className="lg:border-l-1 border-key-200 flex min-h-[100vh] w-full flex-col">
+            <div className="lg:border-l-1 flex min-h-[100vh] w-full flex-col border-key-200">
               <div className="flex-1 px-4 pt-12 lg:px-12 lg:px-16 lg:pt-36">
                 <Outlet />
               </div>
-              <footer className="bg-key-500 font-altsans text-md mt-16 flex flex-col items-center p-4 text-white lg:text-sm">
+              <footer className="text-md mt-16 flex flex-col items-center bg-key-500 p-4 font-altsans text-white lg:text-sm">
                 <Navigation
                   items={navigations.footer}
                   className="flex flex-wrap justify-center gap-x-4 gap-y-0 pb-4 lg:pb-0"

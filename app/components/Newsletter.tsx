@@ -130,7 +130,7 @@ const Newsletter: React.FC<Props> = ({
               )}
               <button
                 type="submit"
-                className="bg-key-500 hover:bg-key-600 text-white"
+                className="bg-key-500 text-white hover:bg-key-600"
               >
                 {loading ? "Lade..." : "Newsletter abonnieren"}
               </button>
