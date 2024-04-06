@@ -143,7 +143,7 @@ export default function App() {
         <body>
           {pathname === "/" && <Intro initiallyHidden={sawIntro} />}
           <div className="mx-auto w-full max-w-[1320px] lg:flex">
-            <aside className="border-b-1 top-0 flex shrink-0 flex-col border-key-500 px-4 pb-4 pt-4 md:overflow-auto md:overscroll-contain lg:sticky lg:h-[100vh] lg:border-none lg:pb-0 lg:pl-8 lg:pr-12 xl:pt-12">
+            <aside className="top-0 flex shrink-0 flex-col border-b border-key-500 px-4 pb-4 pt-4 md:overflow-auto md:overscroll-contain lg:sticky lg:h-[100vh] lg:border-none lg:pb-0 lg:pl-8 lg:pr-12 xl:pt-12">
               <NavLink
                 to="/"
                 prefetch="intent"
@@ -203,7 +203,7 @@ export default function App() {
                 </div>
               </div>
             </aside>
-            <div className="lg:border-l-1 flex min-h-[100vh] w-full flex-col border-key-200">
+            <div className="flex min-h-[100vh] w-full flex-col border-key-200 lg:border-l">
               <div className="flex-1 px-4 pt-12 lg:px-12 lg:px-16 lg:pt-36">
                 <Outlet />
               </div>

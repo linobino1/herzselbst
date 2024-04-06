@@ -376,7 +376,7 @@ export function Serialize({ nodes }: Props): JSX.Element {
                         <div
                           className={twMerge(
                             "w-full border-key-500 md:hidden",
-                            subIndex > 0 && "border-t-1 mb-2 pb-2",
+                            subIndex > 0 && "mb-2 border-t pb-2",
                           )}
                         />
                         <Image
