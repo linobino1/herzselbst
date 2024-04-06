@@ -36,7 +36,7 @@ export const GoogleMapsEmbed: React.FC<Props> = ({
         <div className="aspect-3/2 relative flex flex-col items-center justify-center justify-center p-4">
           <Image
             media={placeholderImage}
-            className="-z-2 absolute h-full w-full object-cover opacity-50"
+            className="absolute -z-20 h-full w-full object-cover opacity-50"
           />
           <p className="text-center text-sm">
             Diese Karte wird nicht angezeigt, da Sie der Nutzung von

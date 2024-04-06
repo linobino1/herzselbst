@@ -29,7 +29,7 @@ const Intro: React.FC<IntroProps> = ({ initiallyHidden }) => {
   return (
     <div
       className={twMerge(
-        "z-25 fixed left-0 top-0 flex h-full w-full flex-col items-center justify-center bg-white",
+        "fixed left-0 top-0 z-30 flex h-full w-full flex-col items-center justify-center bg-white",
         hidden &&
           "pointer-events-none opacity-0 transition-opacity duration-200 ease-in-out",
       )}

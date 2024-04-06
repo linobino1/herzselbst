@@ -28,7 +28,7 @@ export const YoutubeEmbed: React.FC<Props> = ({ pagePrivacy, ...props }) => {
   return isClient ? (
     consent || oneTimeConsent ? (
       <div className="lg:max-w-170 mb-16">
-        {isLoading && <p className="-z-1 absolute">Lade Video...</p>}
+        {isLoading && <p className="absolute -z-10">Lade Video...</p>}
         <ReactPlayer
           {...props}
           controls={true}

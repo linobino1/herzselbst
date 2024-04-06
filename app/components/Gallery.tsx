@@ -39,7 +39,7 @@ export const Gallery: React.FC<Type> = ({ images }) => {
                 },
               ]}
             />
-            <figcaption className="z-1 absolute bottom-1 left-1 bg-black bg-opacity-20 px-2 text-sm text-gray-100">
+            <figcaption className="absolute bottom-1 left-1 z-10 bg-black bg-opacity-20 px-2 text-sm text-gray-100">
               {item.caption}
             </figcaption>
           </figure>

@@ -177,7 +177,7 @@ export default function App() {
               </div>
               <div
                 className={twMerge(
-                  "z-49 fixed right-0 top-0 h-[100vh] h-full translate-x-0 bg-white px-8 pt-12 shadow-lg transition-transform max-lg:overflow-y-auto max-sm:w-full lg:contents lg:text-start",
+                  "fixed right-0 top-0 z-40 h-[100vh] h-full translate-x-0 bg-white px-8 pt-12 shadow-lg transition-transform max-lg:overflow-y-auto max-sm:w-full lg:contents lg:text-start",
                   !isMenuOpen && "translate-x-full shadow-none",
                 )}
               >
