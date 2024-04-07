@@ -1,11 +1,4 @@
-import {
-  BlocksFeature,
-  HTMLConverterFeature,
-  LinkFeature,
-  lexicalEditor,
-} from "@payloadcms/richtext-lexical";
-import { HTMLConverterWithAlign } from "../lexical/HTMLConverterWithAlign";
-import { UploadHTMLConverter } from "../lexical/UploadHTMLCOnverter";
+import { BlocksFeature, lexicalEditor } from "@payloadcms/richtext-lexical";
 import type { Block } from "payload/types";
 import Button from "./Button";
 
@@ -37,21 +30,8 @@ export const CTAColumns: Block = {
           editor: lexicalEditor({
             features: ({ defaultFeatures }) => [
               ...defaultFeatures,
-              LinkFeature({
-                enabledCollections: ["pages", "media"],
-              }),
               BlocksFeature({
                 blocks: [Button],
-              }),
-              HTMLConverterFeature({
-                // @ts-ignore
-                converters: ({ defaultConverters }) => {
-                  return [
-                    HTMLConverterWithAlign,
-                    UploadHTMLConverter,
-                    ...defaultConverters,
-                  ];
-                },
               }),
             ],
           }),
