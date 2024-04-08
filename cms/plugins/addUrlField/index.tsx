@@ -1,5 +1,5 @@
 import type { Config, Plugin } from "payload/config";
-import type { FieldHookArgs } from "payload/dist/fields/config/types";
+import type { Field, FieldHookArgs } from "payload/dist/fields/config/types";
 
 /**
  * this plugin adds a url field to a collection if you add the following to the collection config:
@@ -12,9 +12,8 @@ export const addUrlField: Plugin = (incomingConfig: Config): Config => {
   // Spread the existing config
   const config: Config = {
     ...incomingConfig,
-    // @ts-ignore
     collections: [
-      ...(incomingConfig.collections?.map((collection) =>
+      ...(incomingConfig.collections || [])?.map((collection) =>
         collection.custom?.addUrlField
           ? {
               ...collection,
@@ -32,12 +31,6 @@ export const addUrlField: Plugin = (incomingConfig: Config): Config => {
                   validate: () => true,
                   hooks: {
                     beforeChange: [
-                      ({ siblingData }: FieldHookArgs): void => {
-                        // ensures data is not stored in DB
-                        delete siblingData["url"];
-                      },
-                    ],
-                    afterRead: [
                       (args: FieldHookArgs): string => {
                         const relativeUrl =
                           collection.custom?.addUrlField.hook(args) || "";
@@ -52,13 +45,13 @@ export const addUrlField: Plugin = (incomingConfig: Config): Config => {
                       Field: undefined,
                     },
                   },
-                },
+                } satisfies Field,
               ],
             }
           : {
               ...collection,
             },
-      ) || []),
+      ),
     ],
   };
 
