@@ -57,11 +57,6 @@ export const addUrlField: Plugin = (incomingConfig: Config): Config => {
             }
           : {
               ...collection,
-              admin: {
-                ...collection.admin,
-                enableRichTextLink: false,
-                enableRichTextRelationship: false,
-              },
             },
       ) || []),
     ],
