@@ -422,6 +422,39 @@ export function Serialize({ nodes }: Props): JSX.Element {
                 );
             }
 
+          case "upload":
+            const media = node.value;
+            const caption = node.fields?.caption;
+            if (!media || !media.mimeType?.startsWith("image/")) {
+              return <p key={index}>only images can be used in upload block</p>;
+            }
+            return (
+              <figure key={index} className="relative my-8">
+                <Image
+                  className=""
+                  media={media}
+                  sizes="(max-width: 1024) 100vw, 824px"
+                  srcSet={[
+                    {
+                      options: { width: 600 },
+                      size: "600w",
+                    },
+                    {
+                      options: { width: 1200 },
+                      size: "1200w",
+                    },
+                    {
+                      options: { width: 1800 },
+                      size: "1800w",
+                    },
+                  ]}
+                />
+                <figcaption className="z-1 absolute bottom-1 left-1 bg-black bg-opacity-20 px-2 text-sm text-gray-100">
+                  {caption}
+                </figcaption>
+              </figure>
+            );
+
           default:
             return <p key={index}>unimplemented node type {node.type}</p>;
         }

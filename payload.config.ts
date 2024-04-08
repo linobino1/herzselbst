@@ -16,6 +16,7 @@ import addUrlField from "./cms/plugins/addUrlField";
 import {
   BlocksFeature,
   LinkFeature,
+  UploadFeature,
   lexicalEditor,
 } from "@payloadcms/richtext-lexical";
 import Video from "./cms/blocks/Video";
@@ -69,6 +70,19 @@ export default buildConfig({
           Video,
           Newsletter,
         ],
+      }),
+      UploadFeature({
+        collections: {
+          media: {
+            fields: [
+              {
+                name: "caption",
+                label: "Caption",
+                type: "text",
+              },
+            ],
+          },
+        },
       }),
     ],
   }),
