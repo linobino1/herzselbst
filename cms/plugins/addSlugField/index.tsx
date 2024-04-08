@@ -69,7 +69,7 @@ const field: Field = {
   },
 };
 /**
- * this plugin adds a url field to a collection if you add the following to the collection config:
+ * this plugin adds a slug field to a collection if you add the following to the collection config:
  *
  * custom: {
  *  addSlugField: {
