@@ -12,6 +12,7 @@ export async function up({ payload }: MigrateUpArgs): Promise<void> {
   //     $unset: ["images"],
   //   },
   // ]);
+  // @ts-ignore
   await payload.db.collections.pages?.updateMany(
     {},
     {
@@ -41,6 +42,7 @@ export async function down({ payload }: MigrateDownArgs): Promise<void> {
   //     strict: false,
   //   },
   // );
+  // @ts-ignore
   await payload.db.collections.pages?.updateMany(
     {},
     {

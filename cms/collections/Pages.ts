@@ -1,5 +1,7 @@
-import type { CollectionConfig, FieldHookArgs } from "payload/types";
+import type { CollectionConfig } from "payload/types";
 import { publicReadOnly } from "../access/publicReadOnly";
+import { createUrlField } from "../fields/createUrlField";
+import { createSlugField } from "../fields/createSlugField";
 
 const Pages: CollectionConfig = {
   slug: "pages",
@@ -19,29 +21,23 @@ const Pages: CollectionConfig = {
   // https://github.com/payloadcms/payload/issues/4815
   // defaultSort: "-updatedAt",
   access: publicReadOnly,
-  custom: {
-    addUrlField: {
-      hook: async ({ siblingData, req: { payload } }: FieldHookArgs) => {
-        let s = `/${siblingData.slug || ""}`;
-        if (siblingData.category) {
-          let { category } = siblingData;
-          if (typeof category === "string") {
-            category = await payload.findByID({
-              collection: "categories",
-              id: category,
-              depth: 0,
-            });
-          }
-          s = `/${category.slug}${s}`;
-        }
-        return s;
-      },
-    },
-    addSlugField: {
-      from: "title",
-    },
-  },
   fields: [
+    createSlugField(({ data }) => data?.title),
+    createUrlField(async ({ siblingData, req: { payload } }) => {
+      let s = `/${siblingData.slug || ""}`;
+      if (siblingData.category) {
+        let { category } = siblingData;
+        if (typeof category === "string") {
+          category = await payload.findByID({
+            collection: "categories",
+            id: category,
+            depth: 0,
+          });
+        }
+        s = `/${category.slug}${s}`;
+      }
+      return s;
+    }),
     {
       name: "category",
       label: "Kategorie",

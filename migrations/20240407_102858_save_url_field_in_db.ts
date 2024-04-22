@@ -51,6 +51,7 @@ export async function down({ payload }: MigrateDownArgs): Promise<void> {
         console.log(`Updating collection ${collectionSlug}`);
 
         // unset the url field
+        // @ts-ignore
         await payload.db.collections[collectionSlug]?.updateMany(
           {},
           { $unset: { url: "" } },

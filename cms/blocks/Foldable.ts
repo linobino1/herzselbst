@@ -21,9 +21,11 @@ export const Foldable: Block = {
       required: true,
       // default editor configuration without the Foldable block
       editor: lexicalEditor({
+        // @ts-ignore
         features: ({ defaultFeatures }) => [
           ...defaultFeatures,
           BlocksFeature({
+            // @ts-ignore
             blocks: [Video, Publications],
           }),
         ],

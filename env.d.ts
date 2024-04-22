@@ -54,6 +54,7 @@ declare global {
   }
   interface ServerEnvironment extends BrowserEnvironment {
     NODE_ENV: string;
+    PAYLOAD_SECRET: string;
     S3_ENABLED: string;
     S3_ENDPOINT: string;
     S3_BUCKET: string;

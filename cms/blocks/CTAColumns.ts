@@ -28,12 +28,16 @@ export const CTAColumns: Block = {
           type: "richText",
           required: true,
           editor: lexicalEditor({
-            features: ({ defaultFeatures }) => [
-              ...defaultFeatures,
-              BlocksFeature({
-                blocks: [Button],
-              }),
-            ],
+            // @ts-ignore
+            features({ defaultFeatures }) {
+              return [...defaultFeatures, BlocksFeature({ blocks: [] })];
+            },
+            // features: ({ defaultFeatures }) => [
+            //   ...defaultFeatures,
+            //   BlocksFeature({
+            //     blocks: [Button],
+            //   }),
+            // ],
           }),
         },
       ],

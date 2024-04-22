@@ -1,5 +1,7 @@
-import type { CollectionConfig, FieldHookArgs } from "payload/types";
+import type { CollectionConfig } from "payload/types";
 import { publicReadOnly } from "../access/publicReadOnly";
+import { createUrlField } from "../fields/createUrlField";
+import { createSlugField } from "../fields/createSlugField";
 
 const Categories: CollectionConfig = {
   slug: "categories",
@@ -13,14 +15,6 @@ const Categories: CollectionConfig = {
     defaultColumns: ["title", "slug", "updatedAt"],
   },
   access: publicReadOnly,
-  custom: {
-    addUrlField: {
-      hook: ({ siblingData }: FieldHookArgs) => `/${siblingData.slug || ""}`,
-    },
-    addSlugField: {
-      from: "title",
-    },
-  },
   fields: [
     {
       name: "title",
@@ -36,6 +30,8 @@ const Categories: CollectionConfig = {
       maxDepth: 0,
       required: true,
     },
+    createSlugField(({ data }) => data?.title),
+    createUrlField(({ data }) => (data?.slug ? `/${data?.slug}` : null)),
   ],
 };
 

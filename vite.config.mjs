@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [
     remix({
       ignoredRouteFiles: ["**/.*"],
-      // appDirectory: "app",
+      appDirectory: "remix",
       // assetsBuildDirectory: "public/build",
       // publicPath: "/build/",
       // serverBuildPath: "build/index.js",

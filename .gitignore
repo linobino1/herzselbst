@@ -1,3 +1,8 @@
+.DS_Store
+
+tsconfig.tsbuildinfo
+
+.next
 /media
 
 node_modules

@@ -1,18 +1,15 @@
 import { mongooseAdapter } from "@payloadcms/db-mongodb";
-import { viteBundler } from "@payloadcms/bundler-vite";
 import { buildConfig } from "payload/config";
 import path from "path";
 import Users from "./cms/collections/Users";
 import Media from "./cms/collections/Media";
 import Pages from "./cms/collections/Pages";
 import Categories from "./cms/collections/Categories";
-import seoPlugin from "@payloadcms/plugin-seo";
+import { seo } from "@payloadcms/plugin-seo";
 import { cloudStorage } from "@payloadcms/plugin-cloud-storage";
 import { s3Adapter } from "@payloadcms/plugin-cloud-storage/s3";
 import Navigations from "./cms/globals/Navigations";
 import Site from "./cms/globals/Site";
-import addSlugField from "./cms/plugins/addSlugField";
-import addUrlField from "./cms/plugins/addUrlField";
 import {
   BlocksFeature,
   LinkFeature,
@@ -29,45 +26,53 @@ import Newsletter from "./cms/blocks/Newsletter";
 import Gallery from "./cms/blocks/Gallery";
 import GoogleMaps from "./cms/blocks/GoogleMaps";
 import { linkAppendix } from "./cms/fields/linkAppendix";
+import { fileURLToPath } from "url";
+
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
 
 export default buildConfig({
-  rateLimit: {
-    window: 15 * 60 * 1000, // 15 minutes
-    max: process.env.NODE_ENV === "development" ? 9999999 : 1000, // limit each IP to 1000 requests per windowMs
-  },
+  // rateLimit: {
+  //   window: 15 * 60 * 1000, // 15 minutes
+  //   max: process.env.NODE_ENV === "development" ? 9999999 : 1000, // limit each IP to 1000 requests per windowMs
+  // },
+  secret: process.env.PAYLOAD_SECRET,
   localization: {
     locales: ["de"],
     defaultLocale: "de",
   },
   admin: {
     user: Users.slug,
-    bundler: viteBundler(),
-    vite: (incomingViteConfig) => ({
-      ...incomingViteConfig,
-      build: {
-        ...incomingViteConfig.build,
-        emptyOutDir: false,
-      },
-    }),
   },
   editor: lexicalEditor({
+    // @ts-ignore
     features: ({ defaultFeatures }) => [
       // we remove the ordered list feature because it makes entering dates in the editor difficult, as it automatically creates an ordered list if you type sth. like "22. [...]"
       ...defaultFeatures.filter((feature) => feature.key !== "orderedList"),
       LinkFeature({
         enabledCollections: ["pages", "media"],
+        // @ts-ignore
         fields: [linkAppendix],
       }),
       BlocksFeature({
         blocks: [
+          // @ts-ignore
           Button,
+          // @ts-ignore
           CTAColumns,
+          // @ts-ignore
           Foldable,
+          // @ts-ignore
           Gallery,
+          // @ts-ignore
           GoogleMaps,
+          // @ts-ignore
           Publications,
+          // @ts-ignore
           Review,
+          // @ts-ignore
           Video,
+          // @ts-ignore
           Newsletter,
         ],
       }),
@@ -88,17 +93,15 @@ export default buildConfig({
   }),
   db: mongooseAdapter({
     url: process.env.MONGODB_URI ?? false,
-    migrationDir: path.resolve(__dirname, "migrations"),
+    migrationDir: path.resolve(dirname, "migrations"),
   }),
   collections: [Pages, Categories, Media, Users],
   globals: [Navigations, Site],
   typescript: {
-    outputFile: path.resolve(__dirname, "cms/payload-types.ts"),
+    outputFile: path.resolve(dirname, "cms/payload-types.ts"),
   },
   plugins: [
-    addSlugField,
-    addUrlField,
-    seoPlugin({
+    seo({
       globals: ["site"],
       uploadsCollection: "media",
       fields: [
