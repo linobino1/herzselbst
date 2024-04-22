@@ -9,6 +9,7 @@ export const createSlugField = (
   name: "slug",
   type: "text",
   required: true,
+  validate: () => true,
   admin: {
     readOnly: true,
     position: "sidebar",
