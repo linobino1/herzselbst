@@ -22,7 +22,6 @@ import { Cross as Hamburger } from "hamburger-react";
 import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import getOptimizedImageUrl from "./util/getOptimizedImageUrl";
-import { intro } from "~/cookies";
 
 export async function loader({
   request,
@@ -38,31 +37,19 @@ export async function loader({
     }),
   ]);
 
-  const cookieHeader = request.headers.get("Cookie");
   // if there is a cookie called "intro" with a truthy value, we assume the user has seen the intro
-  const sawIntro = Boolean(await intro.parse(cookieHeader));
-  return json(
-    {
-      ENV: {
-        PAYLOAD_PUBLIC_SERVER_URL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
-        CDN_CGI_IMAGE_URL: process.env.CDN_CGI_IMAGE_URL,
-        USE_CLOUDFLARE_IMAGE_TRANSFORMATIONS:
-          process.env.USE_CLOUDFLARE_IMAGE_TRANSFORMATIONS,
-      },
-      sawIntro,
-      site,
-      navigations,
+  const sawIntro = request.headers.get("Cookie")?.includes("intro=");
+  return json({
+    ENV: {
+      PAYLOAD_PUBLIC_SERVER_URL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
+      CDN_CGI_IMAGE_URL: process.env.CDN_CGI_IMAGE_URL,
+      USE_CLOUDFLARE_IMAGE_TRANSFORMATIONS:
+        process.env.USE_CLOUDFLARE_IMAGE_TRANSFORMATIONS,
     },
-    {
-      // set intro cookie on every request with a max age of 24 hours
-      headers: {
-        "Set-Cookie": await intro.serialize(true, {
-          path: "/",
-          maxAge: 60 * 60 * 24,
-        }),
-      },
-    },
-  );
+    sawIntro,
+    site,
+    navigations,
+  });
 }
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => [
@@ -82,6 +69,11 @@ export default function App() {
       document.body.style.overflow = "hidden";
     }
   };
+
+  // set intro cookie to expire in 1 hour
+  useEffect(() => {
+    document.cookie = `intro=; path=/; max-age=${60 * 60}`;
+  }, []);
 
   useEffect(() => {
     setIsMenuOpen(false);
