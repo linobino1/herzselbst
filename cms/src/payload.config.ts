@@ -11,6 +11,7 @@ import Navigations from './globals/Navigations'
 import Site from './globals/Site'
 import {
   BlocksFeature,
+  FixedToolbarFeature,
   LinkFeature,
   UploadFeature,
   lexicalEditor,
@@ -81,6 +82,7 @@ export default buildConfig({
     features: ({ defaultFeatures }) => [
       // we remove the ordered list feature because it makes entering dates in the editor difficult, as it automatically creates an ordered list if you type sth. like "22. [...]"
       ...defaultFeatures.filter((feature) => feature.key !== 'orderedList'),
+      FixedToolbarFeature(),
       LinkFeature({
         enabledCollections: ['pages', 'media'],
         fields: [linkAppendix],
