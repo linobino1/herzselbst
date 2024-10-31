@@ -31,6 +31,7 @@ import { fileURLToPath } from 'url'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import { ZeptomailTransport } from 'nodemailer-zeptomail-transport'
 import { createTransport } from 'nodemailer'
+import { env } from './util/env'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -55,7 +56,7 @@ export default buildConfig({
     },
   },
   cors: {
-    origins: [process.env.FRONTEND_URL ?? 'http://localhost:5173'],
+    origins: [env.FRONTEND_URL],
   },
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

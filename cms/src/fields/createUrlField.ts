@@ -10,6 +10,9 @@ export const createUrlField = (
   admin: {
     readOnly: true,
     position: 'sidebar',
+    components: {
+      Field: '@/components/UrlField',
+    },
   },
   hooks: {
     beforeChange: [
