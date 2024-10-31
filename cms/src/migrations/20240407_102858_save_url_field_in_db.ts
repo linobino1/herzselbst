@@ -15,7 +15,7 @@ export async function up({ payload }: MigrateUpArgs): Promise<void> {
         const docs = (await payload.find({ collection: collectionSlug, limit: 9999999 })).docs
         await Promise.all(
           docs.map(async (doc) => {
-            let data = await payload.findByID({
+            const data = await payload.findByID({
               collection: collectionSlug,
               id: doc.id,
             })
@@ -47,7 +47,6 @@ export async function down({ payload }: MigrateDownArgs): Promise<void> {
         console.log(`Updating collection ${collectionSlug}`)
 
         // unset the url field
-        // @ts-ignore
         await payload.db.collections[collectionSlug]?.updateMany({}, { $unset: { url: '' } })
       }
     }),

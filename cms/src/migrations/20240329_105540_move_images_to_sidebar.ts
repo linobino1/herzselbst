@@ -1,4 +1,4 @@
-import type { MigrateUpArgs, MigrateDownArgs } from "@payloadcms/db-mongodb";
+import type { MigrateUpArgs, MigrateDownArgs } from '@payloadcms/db-mongodb'
 
 /**
  * pages.images -> pages.sidebar.images
@@ -12,16 +12,15 @@ export async function up({ payload }: MigrateUpArgs): Promise<void> {
   //     $unset: ["images"],
   //   },
   // ]);
-  // @ts-ignore
   await payload.db.collections.pages?.updateMany(
     {},
     {
-      $rename: { images: "sidebar.images" },
+      $rename: { images: 'sidebar.images' },
     },
     {
       strict: false,
     },
-  );
+  )
 }
 
 /**
@@ -42,14 +41,13 @@ export async function down({ payload }: MigrateDownArgs): Promise<void> {
   //     strict: false,
   //   },
   // );
-  // @ts-ignore
   await payload.db.collections.pages?.updateMany(
     {},
     {
-      $rename: { "sidebar.images": "images" },
+      $rename: { 'sidebar.images': 'images' },
     },
     {
       strict: false,
     },
-  );
+  )
 }
