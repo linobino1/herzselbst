@@ -1,9 +1,3 @@
-# migration data
-migrationV2/*
-
-# UnoCSS
-/src/app/(payload)/uno.css
-
 # dependencies
 /node_modules
 /.pnp
