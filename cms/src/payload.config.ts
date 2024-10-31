@@ -59,6 +59,9 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
+  graphQL: {
+    disable: true,
+  },
   // The email adapter is used to send password reset emails
   ...(process.env.ZEPTOMAIL_API_KEY
     ? {
