@@ -13,6 +13,7 @@ const RowLabel: React.FC = () => {
   const [label, setLabel] = useState(fallback)
 
   useEffect(() => {
+    // return
     if (data.type === 'external') {
       setLabel(data.label ?? data.url ?? fallback)
     } else if (data.doc?.value) {
@@ -24,7 +25,7 @@ const RowLabel: React.FC = () => {
         setLabel(((await res.json()) as any).title)
       })
     }
-  }, [data])
+  }, [data.category, data.type, data.label, data.url, data.doc])
 
   return label
 }

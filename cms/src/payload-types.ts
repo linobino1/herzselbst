@@ -232,8 +232,9 @@ export interface Navigations {
           relationTo: 'categories';
           value: string | Category;
         } | null;
+        relativeUrl: string;
+        label: string;
         url?: string | null;
-        label?: string | null;
         newTab?: boolean | null;
         subnavigation?:
           | {
@@ -246,8 +247,9 @@ export interface Navigations {
                 relationTo: 'categories';
                 value: string | Category;
               } | null;
+              relativeUrl: string;
+              label: string;
               url?: string | null;
-              label?: string | null;
               newTab?: boolean | null;
               id?: string | null;
             }[]
@@ -266,8 +268,9 @@ export interface Navigations {
           relationTo: 'categories';
           value: string | Category;
         } | null;
+        relativeUrl: string;
+        label: string;
         url?: string | null;
-        label?: string | null;
         newTab?: boolean | null;
         id?: string | null;
       }[]

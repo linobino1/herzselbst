@@ -12,7 +12,7 @@ export const createUrlField = (
     position: 'sidebar',
   },
   hooks: {
-    afterRead: [
+    beforeChange: [
       (args: FieldHookArgs) => {
         return hook(args)
       },

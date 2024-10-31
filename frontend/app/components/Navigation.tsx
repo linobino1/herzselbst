@@ -25,8 +25,7 @@ const NavigationItem: React.FC<ItemProps> = ({
   const [isToggled, setIsToggled] = useState<Record<string, boolean>>({})
 
   if (item.type === 'subnavigation') {
-    const category = item.category?.value as Category
-    const isActive = pathname.includes(category.slug || '')
+    const isActive = pathname !== '/' && pathname.includes(item.relativeUrl ?? '')
     return (
       <div className="flex flex-col gap-0">
         <div className="flex items-start justify-between gap-8 lg:contents">
@@ -47,15 +46,16 @@ const NavigationItem: React.FC<ItemProps> = ({
             />
           </button>
           <NavLink
-            to={category.url || ''}
+            to={item.relativeUrl ?? ''}
             className={twMerge(
               'hover:text-key-400 mb-2',
               itemClassName,
               isActive && activeItemClassName,
+              // isActive && 'text-red',
             )}
             prefetch="intent"
           >
-            {category.title}
+            {item.label}
           </NavLink>
         </div>
         <Navigation
@@ -90,13 +90,13 @@ const NavigationItem: React.FC<ItemProps> = ({
   if (item.type === 'internal') {
     return (
       <NavLink
-        to={(item.doc?.value as any).url}
+        to={item.relativeUrl ?? ''}
         className={({ isActive, isPending }) =>
           twMerge(classes, (isActive || isPending) && activeItemClassName)
         }
         prefetch="intent"
       >
-        {item.label || (item.doc?.value as any).title}
+        {item.label}
       </NavLink>
     )
   }

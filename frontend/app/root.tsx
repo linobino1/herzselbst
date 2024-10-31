@@ -33,7 +33,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
     }),
     payload.findGlobal({
       slug: 'navigations',
-      depth: 1,
+      depth: 0,
     }),
   ])
 

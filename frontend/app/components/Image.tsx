@@ -31,6 +31,8 @@ export const Image: React.FC<Props> = ({ media, srcSet, src, alt, width, height,
         return `${getOptimizedImageUrl(src as string, env, item.options)} ${item.size}`
       })
       .join(', ')
+  } else {
+    srcSet = undefined
   }
 
   return <img {...props} src={src} alt={alt} width={width} height={height} srcSet={srcSet} />

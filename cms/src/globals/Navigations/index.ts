@@ -1,5 +1,7 @@
 import type { ArrayField, GlobalConfig } from 'payload'
 import { isLoggedIn } from '../../access/isLoggedIn'
+import { updateRelativeUrl } from './hooks/updateRelativeUrl'
+import { updateLabel } from './hooks/updateLabel'
 
 const createNavigationField = (
   name: string,
@@ -26,7 +28,6 @@ const createNavigationField = (
       return true
     },
   },
-  // @ts-expect-error everything is fine, it's just that filter(Boolean) is not typed
   fields: [
     {
       name: 'type',
@@ -42,12 +43,14 @@ const createNavigationField = (
           label: 'Externer Link',
           value: 'external',
         },
-        allowSubnavigation
-          ? {
-              label: 'Untermenü',
-              value: 'subnavigation',
-            }
-          : null,
+        ...(allowSubnavigation
+          ? [
+              {
+                label: 'Untermenü',
+                value: 'subnavigation',
+              },
+            ]
+          : []),
       ].filter(Boolean),
     },
     // internal link
@@ -56,18 +59,44 @@ const createNavigationField = (
       label: 'Seite',
       type: 'relationship',
       relationTo: ['pages'],
+      maxDepth: 0,
       admin: {
         condition: (data: any, siblingData: any) => siblingData?.type === 'internal',
       },
     },
+    // subnavigation
     {
       name: 'category',
       label: 'Kategorie',
       type: 'relationship',
       relationTo: ['categories'],
+      maxDepth: 0,
       required: true,
       admin: {
         condition: (data: any, siblingData: any) => siblingData?.type === 'subnavigation',
+      },
+    },
+    {
+      name: 'relativeUrl',
+      type: 'text',
+      required: true,
+      hooks: {
+        beforeChange: [updateRelativeUrl],
+      },
+      // hidden: true,
+      validate: (value: any, { siblingData }: { siblingData: any }) =>
+        siblingData?.type === 'external' ? true : !value ? 'required' : true,
+    },
+    {
+      name: 'label',
+      label: 'Bezeichnung',
+      type: 'text',
+      required: true,
+      hooks: {
+        beforeChange: [updateLabel],
+      },
+      admin: {
+        description: 'Leer lassen, um den Seiten- bzw. Kategorientitel zu übernehmen.',
       },
     },
     // external link
@@ -80,15 +109,6 @@ const createNavigationField = (
       },
     },
     {
-      name: 'label',
-      label: 'Bezeichnung',
-      type: 'text',
-      admin: {
-        condition: (data: any, siblingData: any) => siblingData?.type !== 'subnavigation',
-        description: 'Default: Titel der verlinkten Seite',
-      },
-    },
-    {
       name: 'newTab',
       label: 'In neuem Tab öffnen',
       type: 'checkbox',
@@ -97,9 +117,10 @@ const createNavigationField = (
         condition: (data: any, siblingData: any) => siblingData?.type !== 'subnavigation',
       },
     },
-    // subnavigation
-    allowSubnavigation ? createNavigationField('subnavigation', 'Untermenü', false, true) : null,
-  ].filter(Boolean),
+    ...(allowSubnavigation
+      ? [createNavigationField('subnavigation', 'Untermenü', false, true)]
+      : []),
+  ],
 })
 
 export const Navigations: GlobalConfig = {
