@@ -29,10 +29,7 @@ const Pages: CollectionConfig = {
       },
     },
   },
-
-  // uncomment the next line as soon as this bug is fixed:
-  // https://github.com/payloadcms/payload/issues/4815
-  // defaultSort: "-updatedAt",
+  defaultSort: '-updatedAt',
   access: publicReadOnly,
   fields: [
     createSlugField(({ data }) => data?.title),
