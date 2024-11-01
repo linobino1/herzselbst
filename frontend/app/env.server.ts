@@ -3,6 +3,7 @@ import { z } from 'zod'
 const schema = z.object({
   NODE_ENV: z.string().default('development'),
   FRONTEND_URL: z.string().default('http://localhost:5173'),
+  BACKEND_URL: z.string().default('http://localhost:3000'),
   DATABASE_URI: z.string(),
   PAYLOAD_SECRET: z.string(),
   S3_ENABLED: z.string().default('false'),
@@ -18,6 +19,7 @@ const schema = z.object({
 const clientSchema = schema.pick({
   NODE_ENV: true,
   FRONTEND_URL: true,
+  BACKEND_URL: true,
   MEDIA_URL: true,
   CDN_CGI_IMAGE_URL: true,
 })

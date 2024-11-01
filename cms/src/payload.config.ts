@@ -38,6 +38,7 @@ const dirname = path.dirname(filename)
 
 export default buildConfig({
   secret: process.env.PAYLOAD_SECRET!,
+  serverURL: env.BACKEND_URL,
   // content localization
   localization: {
     locales: ['de'],

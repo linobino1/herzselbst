@@ -8,11 +8,7 @@ export const createUrlField = (
   required: true,
   validate: () => true as const,
   admin: {
-    readOnly: true,
-    position: 'sidebar',
-    components: {
-      Field: '@/components/UrlField',
-    },
+    hidden: true,
   },
   hooks: {
     beforeChange: [

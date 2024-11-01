@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 import { publicReadOnly } from '@/access/publicReadOnly'
 import { createUrlField } from '@/fields/createUrlField'
 import { createSlugField } from '@/fields/createSlugField'
+import { generatePreviewURL } from '@/util/generatePreviewURL'
 
 const Pages: CollectionConfig = {
   slug: 'pages',
@@ -16,7 +17,19 @@ const Pages: CollectionConfig = {
     pagination: {
       defaultLimit: 50,
     },
+    preview: (data) => generatePreviewURL(data.url as string),
+    livePreview: {
+      url: ({ data }) => generatePreviewURL(data.url as string),
+    },
   },
+  versions: {
+    drafts: {
+      autosave: {
+        interval: 1000,
+      },
+    },
+  },
+
   // uncomment the next line as soon as this bug is fixed:
   // https://github.com/payloadcms/payload/issues/4815
   // defaultSort: "-updatedAt",

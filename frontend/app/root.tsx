@@ -23,6 +23,7 @@ import { twMerge } from 'tailwind-merge'
 import { getOptimizedImageUrl } from './util/media/getOptimizedImageUrl'
 import { getPayload } from './util/getPayload.server'
 import { envClient } from './env.server'
+import { LivePreviewListener } from './components/LivePreviewListener'
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const payload = await getPayload()
@@ -94,6 +95,7 @@ export default function App() {
       </head>
       <CookieConsentProvider>
         <body>
+          <LivePreviewListener />
           {pathname === '/' && <Intro initiallyHidden={sawIntro} />}
           <div className="mx-auto w-full max-w-[1320px] lg:flex">
             <aside className="border-b-1 border-key-500 top-0 flex shrink-0 flex-col px-4 pb-4 pt-4 md:overflow-auto md:overscroll-contain lg:sticky lg:h-[100vh] lg:border-none lg:pb-0 lg:pl-8 lg:pr-12 xl:pt-12">

@@ -7,6 +7,7 @@ import RichText from '~/components/RichText'
 import generateTitle from '~/util/generateTitle'
 import { getPayload } from '~/util/getPayload.server'
 import { isEmptyLexical } from '~/util/isEmptyLexical'
+import { isPreview } from '~/util/isPreview'
 
 export function ErrorBoundary() {
   const error = useRouteError()
@@ -44,8 +45,10 @@ export const meta: MetaFunction<typeof loader> = ({ data, matches }) => {
   ]
 }
 
-export const loader = async ({ params: { page, category } }: LoaderFunctionArgs) => {
+export const loader = async ({ params: { page, category }, request }: LoaderFunctionArgs) => {
   const payload = await getPayload()
+  const draft = isPreview(request)
+
   // find out which page to load
   let pageSlug: string = 'home'
 
@@ -57,7 +60,7 @@ export const loader = async ({ params: { page, category } }: LoaderFunctionArgs)
     pageSlug = page
   } else if (typeof category !== 'undefined' && typeof page === 'undefined') {
     // only one param given -> could be a page or category slug
-    const [pageDocs, categoryDocs] = await Promise.all([
+    const [pages, categories] = await Promise.all([
       payload.find({
         collection: 'pages',
         where: {
@@ -66,6 +69,7 @@ export const loader = async ({ params: { page, category } }: LoaderFunctionArgs)
           },
         },
         depth: 1,
+        draft,
       }),
       payload.find({
         collection: 'categories',
@@ -78,13 +82,13 @@ export const loader = async ({ params: { page, category } }: LoaderFunctionArgs)
       }),
     ])
 
-    if (pageDocs.totalDocs) {
+    if (pages.totalDocs) {
       pageSlug = category
-    } else if (categoryDocs.totalDocs) {
+    } else if (categories.totalDocs) {
       pageSlug = (
         await payload.findByID({
           collection: 'pages',
-          id: categoryDocs.docs[0]?.defaultPage as string,
+          id: categories.docs[0]?.defaultPage as string,
         })
       ).slug as string
       throw redirect(`/${category}/${pageSlug}`)
@@ -100,6 +104,7 @@ export const loader = async ({ params: { page, category } }: LoaderFunctionArgs)
         equals: pageSlug,
       },
     },
+    draft,
   })
 
   if (!pageDocs.totalDocs) {

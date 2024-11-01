@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@payloadcms/db-mongodb": "beta",
+    "@payloadcms/live-preview-react": "beta",
     "@payloadcms/richtext-lexical": "beta",
     "@remix-run/node": "^2.13.1",
     "@remix-run/react": "^2.13.1",
