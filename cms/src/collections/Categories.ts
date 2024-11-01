@@ -6,8 +6,8 @@ import { createSlugField } from '@/fields/createSlugField'
 const Categories: CollectionConfig = {
   slug: 'categories',
   labels: {
-    singular: 'Seitenkategorie',
-    plural: 'Seitenkategorien',
+    singular: 'Überseite',
+    plural: 'Überseiten',
   },
   admin: {
     group: 'Inhalte',

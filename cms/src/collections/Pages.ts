@@ -53,7 +53,7 @@ const Pages: CollectionConfig = {
     }),
     {
       name: 'category',
-      label: 'Kategorie',
+      label: 'Überseite',
       type: 'relationship',
       relationTo: 'categories',
       maxDepth: 0,
