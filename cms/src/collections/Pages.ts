@@ -13,7 +13,7 @@ const Pages: CollectionConfig = {
   admin: {
     group: 'Inhalte',
     useAsTitle: 'title',
-    defaultColumns: ['title', 'category'],
+    defaultColumns: ['title', 'category', '_status'],
     pagination: {
       defaultLimit: 50,
     },
